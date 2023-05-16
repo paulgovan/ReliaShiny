@@ -15,8 +15,8 @@ ui <- shinydashboard::dashboardPage(
             shinydashboard::menuItem("Data", tabName = "data", icon = icon("table")),
             shinydashboard::menuItem("Modeling", tabName = "model", icon = icon("chart-line")),
             shiny::br(),
-            shinydashboard::menuItem("Help", icon = icon("info-circle"), href = ""),
-            shinydashboard::menuItem("Source Code", icon = icon("github"), href = ""),
+            shinydashboard::menuItem("Help", icon = icon("info-circle"), href = "https://github.com/paulgovan/WeibullR.shiny/blob/master/ReadMe.md"),
+            shinydashboard::menuItem("Source Code", icon = icon("github"), href = "https://github.com/paulgovan/WeibullR.shiny"),
             shiny::br(),
             shiny::bookmarkButton()
         )
@@ -45,7 +45,7 @@ ui <- shinydashboard::dashboardPage(
                                         shiny::br(),
                                         shiny::h4(
                                             "For help getting started, view the ",
-                                            shiny::a(href = '', 'ReadMe'),
+                                            shiny::a(href = 'https://github.com/paulgovan/WeibullR.shiny/blob/master/ReadMe.md', 'ReadMe'),
                                             "."
                                         ),
                                         shiny::h4(
@@ -369,7 +369,13 @@ ui <- shinydashboard::dashboardPage(
                                                                 # Ylab
                                                                 shiny::textInput(inputId = "ylab2",
                                                                                  h5("Y-axis Label:"),
-                                                                                 value = "Beta")
+                                                                                 value = "Beta"),
+                                                                # Significant digits
+                                                                shiny::numericInput(
+                                                                    inputId = "signif2",
+                                                                    h5("Significant Digits:"),
+                                                                    value = 3
+                                                                )
                                                             )))
                                     )
                                 ))

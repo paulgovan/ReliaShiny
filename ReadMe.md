@@ -20,6 +20,40 @@ To launch the app:
 WeibullR.shiny::WeibullR.shiny()
 ```
 
+## Example
+
+### Landing
+
+Launching the app brings up the Landing tab. From here you can access
+this ReadMe, download an example dataset, or navigate to the Data tab.
+
+![Landing](inst/images/Landing.png)
+
+### Data
+
+For this example, we will use the example ‘Time-to-Failure’ dataset. To
+access, first download the dataset locally from the Landing tab, and
+then use the Data Input option in the Data tab to upload the dataset to
+the app. At this point, your app should look like the image below. There
+are additional options for arranging your data for analysis, but for
+here we will use the default option.
+
+![Data](inst/images/Data.png)
+
+### Modeling
+
+Now click on the Modeling tab to build the model. The app will use the
+default options to build a Probability Plot. Feel free to try different
+options to configure the model. Below the plot are additional plot
+options to configure the plot.
+
+![Probability](inst/images/ProbPlot.png)
+
+Finally, click on the Contour Plot tab to build a contour plot. As
+before, there are other plot options for configuring the contour plot.
+
+![Contour](inst/images/ContPlot.png)
+
 ## More Resources
 
 For examples of using WeibullR.plotly, visit

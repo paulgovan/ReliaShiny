@@ -31,12 +31,12 @@ this ReadMe, download an example dataset, or navigate to the Data tab.
 
 ### Data
 
-For this example, we will use the example ‘Time-to-Failure’ dataset. To
+For this example, we will use the sample ‘Time-to-Failure’ dataset. To
 access, first download the dataset locally from the Landing tab, and
 then use the Data Input option in the Data tab to upload the dataset to
 the app. At this point, your app should look like the image below. There
 are additional options for arranging your data for analysis, but for
-here we will use the default option.
+this example, we will use the default option.
 
 ![Data](inst/images/Data.png)
 

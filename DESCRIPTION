@@ -16,3 +16,4 @@ Imports:
 Encoding: UTF-8
 RoxygenNote: 7.2.3
 URL: https://paulgovan.github.io/WeibullR.shiny/
+BugReports: https://github.com/paulgovan/weibullr.learnr/issues

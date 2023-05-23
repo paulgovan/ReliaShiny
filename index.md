@@ -1,4 +1,6 @@
 
+## WeibullR.shiny
+
 <img src="https://github.com/paulgovan/WeibullR.shiny/blob/master/inst/app/www/WeibullR.png?raw=true" style="width:25.0%" />
 
 WeibullR.shiny is a Shiny web application for life data analysis. This
@@ -57,7 +59,7 @@ before, there are other plot options for configuring the contour plot.
 ## More Resources
 
 For more info on WeibullR.plotly, visit
-[paulgovan.github.io/WeibullR.plotly/](paulgovan.github.io/WeibullR.plotly/)
+[paulgovan.github.io/WeibullR.plotly/](https://paulgovan.github.io/WeibullR.plotly/)
 
 For an interactive introduction to Life Data Analysis, check out
-[WeibullR.learnr](paulgovan.github.io/WeibullR.learnr/)
+[WeibullR.learnr](https://paulgovan.github.io/WeibullR.learnr/)

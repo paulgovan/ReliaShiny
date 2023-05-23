@@ -1,8 +1,3 @@
-#' @import plotly
-#' @import shiny
-#' @import shinydashboard
-#' @import WeibullR
-
 ## app.R ##
 ui <- shinydashboard::dashboardPage(
     skin = "red",
@@ -389,7 +384,7 @@ ui <- shinydashboard::dashboardPage(
 server <- function(input, output, session) {
 
     # Example Time-to-Failure data
-    acid_gas_compressor <- 'https://raw.githubusercontent.com/openrelia/WeibullR.gallery/master/data/acid_gas_compressor.csv'
+    acid_gas_compressor <- read.csv('data/acid_gas_compressor.csv')
 
     # Time-to-Failure data handler
     output$failure_data <- shiny::downloadHandler(
@@ -400,7 +395,7 @@ server <- function(input, output, session) {
     )
 
     # Example Right Censored data
-    treat6mp <- 'https://raw.githubusercontent.com/openrelia/WeibullR.gallery/master/data/compare_6-MP/treat6mp.csv'
+    treat6mp <- read.csv('data/treat6mp.csv')
 
     # Right Censored data handler
     output$censored_data <- shiny::downloadHandler(

@@ -3,6 +3,7 @@
 export(WeibullR.shiny)
 export(plotly_contour)
 export(plotly_wblr)
+import(DT)
 import(WeibullR)
 import(plotly)
 import(shiny)

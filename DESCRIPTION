@@ -4,13 +4,16 @@ Title: A Shiny App for Weibull Analysis from WeibullR
 Version: 0.1.0
 Author: Paul Govan
 Maintainer: Paul Govan <ypgovan1@aggienetwork.com>
-Description: WeibullR.shiny is a Shiny web application for life data analysis. This package depends on WeibullR, a R package for 
-  Weibull analysis, and plotly, an interactive web-based graphing library.
+Description: WeibullR.shiny is a Shiny web application for life data analysi.
+  This package depends on WeibullR, a R package for Weibull analysis, and 
+  plotly, an interactive web-based graphing library.
 License: Apache License | file LICENSE
 Imports:
-  WeibullR,
+  DT,
   plotly,
+  WeibullR,
   shiny,
   shinydashboard
 Encoding: UTF-8
 RoxygenNote: 7.2.3
+URL: https://paulgovan.github.io/WeibullR.shiny/

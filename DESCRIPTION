@@ -2,8 +2,7 @@ Package: WeibullR.shiny
 Type: Package
 Title: A Shiny App for Weibull Analysis from WeibullR
 Version: 0.1.0
-Author: Paul Govan
-Maintainer: Paul Govan <ypgovan1@aggienetwork.com>
+Authors@R: person("Paul", "Govan", email = "pgovan1@aggienetwork.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-1821-8492"))
 Description: WeibullR.shiny is a Shiny web application for life data analysi.
   This package depends on WeibullR, a R package for Weibull analysis, and 
   plotly, an interactive web-based graphing library.

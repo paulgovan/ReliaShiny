@@ -54,10 +54,49 @@
   </div>
 </nav><div class="container template-home">
 <div class="row">
-  <main id="main" class="col-md-9">
-WeibullR.shiny is a Shiny web application for life data analysi.
-  This package depends on WeibullR, a R package for Weibull analysis, and 
-  plotly, an interactive web-based graphing library.
+  <main id="main" class="col-md-9"><p><img src="https://github.com/paulgovan/WeibullR.shiny/blob/master/inst/app/www/WeibullR.png?raw=true" style="width:25.0%"></p>
+<p>WeibullR.shiny is a Shiny web application for life data analysis. This package depends on WeibullR, a R package for Weibull analysis, and plotly, an interactive web-based graphing library.</p>
+<div class="section level2">
+<h2 id="getting-started">Getting Started<a class="anchor" aria-label="anchor" href="#getting-started"></a>
+</h2>
+<p>WeibullR.shiny is still in development. To install the developmental version in R:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">'paulgovan/weibullr.shiny'</span><span class="op">)</span></span></code></pre></div>
+<p>To launch the app:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">WeibullR.shiny</span><span class="fu">::</span><span class="fu"><a href="reference/WeibullR.shiny.html">WeibullR.shiny</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h2>
+<div class="section level3">
+<h3 id="landing">Landing<a class="anchor" aria-label="anchor" href="#landing"></a>
+</h3>
+<p>Launching the app brings up the Landing tab. From here you can access this ReadMe, download an example dataset, or navigate to the Data tab.</p>
+<p><img src="https://github.com/paulgovan/WeibullR.shiny/blob/master/inst/images/Landing.png?raw=true"></p>
+</div>
+<div class="section level3">
+<h3 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a>
+</h3>
+<p>For this example, we will use the example ‘Time-to-Failure’ dataset. To access, first download the dataset locally from the Landing tab, and then use the Data Input option in the Data tab to upload the dataset to the app. At this point, your app should look like the image below. There are additional options for arranging your data for analysis, but for here we will use the default option.</p>
+<p><img src="https://github.com/paulgovan/WeibullR.shiny/blob/master/inst/images/Data.png?raw=true"></p>
+</div>
+<div class="section level3">
+<h3 id="modeling">Modeling<a class="anchor" aria-label="anchor" href="#modeling"></a>
+</h3>
+<p>Now click on the Modeling tab to build the model. The app will use the default options to build a Probability Plot. Feel free to try different options to configure the model. Below the plot are additional plot options to configure the plot.</p>
+<p><img src="https://github.com/paulgovan/WeibullR.shiny/blob/master/inst/images/ProbPlot.png?raw=true"></p>
+<p>Finally, click on the Contour Plot tab to build a contour plot. As before, there are other plot options for configuring the contour plot.</p>
+<p><img src="https://github.com/paulgovan/WeibullR.shiny/blob/master/inst/images/ContPlot.png?raw=true"></p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="more-resources">More Resources<a class="anchor" aria-label="anchor" href="#more-resources"></a>
+</h2>
+<p>For more info on WeibullR.plotly, visit <a href="paulgovan.github.io/WeibullR.plotly/">paulgovan.github.io/WeibullR.plotly/</a></p>
+<p>For an interactive introduction to Life Data Analysis, check out <a href="paulgovan.github.io/WeibullR.learnr/">WeibullR.learnr</a></p>
+</div>
+
   </main><aside class="col-md-3"><div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
@@ -77,7 +116,7 @@ WeibullR.shiny is a Shiny web application for life data analysi.
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Paul Govan <br><small class="roles"> Maintainer </small>  </li>
+<li>Paul Govan <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-1821-8492" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
 

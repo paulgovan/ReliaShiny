@@ -60,4 +60,4 @@ For more info on WeibullR.plotly, visit
 [paulgovan.github.io/WeibullR.plotly/](paulgovan.github.io/WeibullR.plotly/)
 
 For an interactive introduction to Life Data Analysis, check out
-[WeibullR.learnr](paulgovan.github.io/WeibullR.learnr/)
+[WeibullR.learnr](paulgovan.github.io/WeibullR.learnr)

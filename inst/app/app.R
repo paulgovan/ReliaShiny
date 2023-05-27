@@ -10,7 +10,7 @@ ui <- shinydashboard::dashboardPage(
             shinydashboard::menuItem("Data", tabName = "data", icon = icon("table")),
             shinydashboard::menuItem("Modeling", tabName = "model", icon = icon("chart-line")),
             shiny::br(),
-            shinydashboard::menuItem("Help", icon = icon("info-circle"), href = "https://github.com/paulgovan/WeibullR.shiny/blob/master/ReadMe.md"),
+            shinydashboard::menuItem("Help", icon = icon("info-circle"), href = "https://paulgovan.github.io/WeibullR.shiny/"),
             shinydashboard::menuItem("Source Code", icon = icon("github"), href = "https://github.com/paulgovan/WeibullR.shiny"),
             shiny::br(),
             shiny::bookmarkButton()
@@ -40,7 +40,7 @@ ui <- shinydashboard::dashboardPage(
                                         shiny::br(),
                                         shiny::h4(
                                             "For help getting started, view the ",
-                                            shiny::a(href = 'https://github.com/paulgovan/WeibullR.shiny/blob/master/ReadMe.md', 'ReadMe'),
+                                            shiny::a(href = 'https://paulgovan.github.io/WeibullR.shiny/', 'ReadMe'),
                                             "."
                                         ),
                                         shiny::h4(
@@ -190,7 +190,8 @@ ui <- shinydashboard::dashboardPage(
                                             title = "Data Table",
                                             width = NULL,
                                             collapsible = TRUE,
-                                            DT::dataTableOutput("table")
+                                            # DT::dataTableOutput("table")
+                                            rhandsontable::rHandsontableOutput("hot")
                                         )
                                     )
                                 )),
@@ -506,7 +507,7 @@ server <- function(input, output, session) {
     })
 
     # Create a table of the user dataset
-    output$table <- DT::renderDT({
+    output$hot = rhandsontable::renderRHandsontable({
         if (is.null(dat()))
             return(NULL)
 
@@ -514,13 +515,32 @@ server <- function(input, output, session) {
             shiny::need(!is.null(dat()), message = FALSE)
         )
 
-        DT::datatable(dat(), rownames = FALSE,
-                      options = list(columnDefs = list(
-                          list(className = 'dt-center', targets = "_all")
-                      ))
-                      # , editable = TRUE
-        )
+        if (!is.null(input$hot)) {
+            DF = hot_to_r(input$hot)
+        } else {
+            DF = dat()
+        }
+
+        rhandsontable(DF, readOnly = TRUE) %>%
+            hot_table(highlightCol = TRUE, highlightRow = TRUE)
     })
+
+    # Create a table of the user dataset
+    # output$table <- DT::renderDT({
+    #     if (is.null(dat()))
+    #         return(NULL)
+    #
+    #     shiny::validate(
+    #         shiny::need(!is.null(dat()), message = FALSE)
+    #     )
+    #
+    #     DT::datatable(dat(), rownames = FALSE,
+    #                   options = list(columnDefs = list(
+    #                       list(className = 'dt-center', targets = "_all")
+    #                   ))
+    #                   # , editable = TRUE
+    #     )
+    # })
 
     # Get data edits from the user
     # observeEvent(input$table_cell_edit, {

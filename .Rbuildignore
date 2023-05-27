@@ -10,3 +10,5 @@
 ^pkgdown$
 ^\.github$
 ^index\.md$
+^LICENSE$
+^news\.md$

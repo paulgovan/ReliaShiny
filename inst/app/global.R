@@ -1,5 +1,5 @@
-library(DT)
 library(plotly)
+library(rhandsontable)
 library(WeibullR)
 library(WeibullR.plotly)
 library(shiny)

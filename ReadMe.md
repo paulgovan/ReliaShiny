@@ -1,5 +1,5 @@
 
-## WeibullR.shiny
+# WeibullR.shiny
 
 <img src="https://github.com/paulgovan/WeibullR.shiny/blob/master/inst/app/www/WeibullR.png?raw=true" style="width:25.0%" />
 
@@ -7,7 +7,7 @@ WeibullR.shiny is a Shiny web application for life data analysis. This
 package depends on WeibullR, a R package for Weibull analysis, and
 plotly, an interactive web-based graphing library.
 
-## Getting Started
+# Getting Started
 
 WeibullR.shiny is still in development. To install the developmental
 version in R:
@@ -22,16 +22,16 @@ To launch the app:
 WeibullR.shiny::WeibullR.shiny()
 ```
 
-## Example
+# Example
 
-### Landing
+## Landing
 
 Launching the app brings up the Landing tab. From here you can access
 this ReadMe, download an example dataset, or navigate to the Data tab.
 
 ![](https://github.com/paulgovan/WeibullR.shiny/blob/master/inst/images/Landing.png?raw=true)
 
-### Data
+## Data
 
 For this example, we will use the example ‘Time-to-Failure’ dataset. To
 access, first download the dataset locally from the Landing tab, and
@@ -42,7 +42,7 @@ here we will use the default option.
 
 ![](https://github.com/paulgovan/WeibullR.shiny/blob/master/inst/images/Data.png?raw=true)
 
-### Modeling
+## Modeling
 
 Now click on the Modeling tab to build the model. The app will use the
 default options to build a Probability Plot. Feel free to try different
@@ -59,7 +59,7 @@ before, there are other plot options for configuring the contour plot.
 ## More Resources
 
 For more info on WeibullR.plotly, visit
-[WeibullR.plotly](https://paulgovan.github.io/WeibullR.plotly/)
+[paulgovan.github.io/WeibullR.plotly/](https://paulgovan.github.io/WeibullR.plotly/)
 
 For an interactive introduction to Life Data Analysis, check out
 [WeibullR.learnr](https://paulgovan.github.io/WeibullR.learnr/)

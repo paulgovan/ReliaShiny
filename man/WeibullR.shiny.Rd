@@ -15,5 +15,5 @@ if (interactive()) {
 }
 }
 \seealso{
-\url{http://paulgovan.github.io/WeibullR.shiny/}
+\url{https://paulgovan.github.io/WeibullR.shiny/}
 }

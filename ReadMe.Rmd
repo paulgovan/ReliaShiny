@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ![](https://github.com/paulgovan/WeibullR.shiny/blob/master/inst/app/www/WeibullR.png?raw=true){width=25%}
 
-WeibullR.shiny is a Shiny web application for life data analysis. This package depends on WeibullR, a R package for Weibull analysis, and plotly, an interactive web-based graphing library.
+A Shiny web application for life data analysis that depends on WeibullR, a R package for Weibull analysis.
 
 # Getting Started 
 
@@ -25,6 +25,8 @@ To launch the app:
 ```{r, eval=FALSE}
 WeibullR.shiny::WeibullR.shiny()
 ```
+
+Or to access the app through a browser, visit [paulgovan.shinyapps.io/WeibullRshiny](paulgovan.shinyapps.io/WeibullRshiny).
 
 # Example
 ## Landing

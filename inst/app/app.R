@@ -1,4 +1,3 @@
-## app.R ##
 ui <- shinydashboard::dashboardPage(
     skin = "red",
     shinydashboard::dashboardHeader(title = "WeibullR.shiny"),
@@ -190,7 +189,6 @@ ui <- shinydashboard::dashboardPage(
                                             title = "Data Table",
                                             width = NULL,
                                             collapsible = TRUE,
-                                            # DT::dataTableOutput("table")
                                             rhandsontable::rHandsontableOutput("hot")
                                         )
                                     )
@@ -288,10 +286,6 @@ ui <- shinydashboard::dashboardPage(
                                                         ),
                                                         selected = "lightgray"
                                                     ),
-                                                    # Show grid
-                                                    shiny::checkboxInput("grid",
-                                                                         label = "Show grid?",
-                                                                         value = TRUE),
                                                     # Main title
                                                     shiny::textInput(inputId = "main",
                                                                      h5("Title:"),
@@ -309,7 +303,19 @@ ui <- shinydashboard::dashboardPage(
                                                         inputId = "signif",
                                                         h5("Significant Digits:"),
                                                         value = 3
-                                                    )
+                                                    ),
+                                                    # Show suspensions plot
+                                                    shiny::checkboxInput("suspPlot",
+                                                                         label = "Show suspensions plot?",
+                                                                         value = TRUE),
+                                                    # Show results table
+                                                    shiny::checkboxInput("resTab",
+                                                                         label = "Show results table?",
+                                                                         value = TRUE),
+                                                    # Show grid
+                                                    shiny::checkboxInput("grid",
+                                                                         label = "Show grid?",
+                                                                         value = TRUE),
                                                 )
                                             )
                                         ),
@@ -484,8 +490,8 @@ server <- function(input, output, session) {
         } else if (input$intervals == 1) {
             time <- subset(dat(), select = input$right)
             colnames(time) <- 'time'
-            wblr_dat <- data.frame(time, event = event(), qty = qty()) %>%
-                subset(event == 0)
+            wblr_dat0 <- data.frame(time, event = event(), qty = qty())
+                wblr_dat0 <- subset(event == 0)
         }
     })
 
@@ -516,13 +522,13 @@ server <- function(input, output, session) {
         )
 
         if (!is.null(input$hot)) {
-            DF = hot_to_r(input$hot)
+            DF = rhandsontable::hot_to_r(input$hot)
         } else {
             DF = dat()
         }
 
-        rhandsontable(DF, readOnly = TRUE) %>%
-            hot_table(highlightCol = TRUE, highlightRow = TRUE)
+        rhandsontable::rhandsontable(DF, readOnly = TRUE) %>%
+            rhandsontable::hot_table(highlightCol = TRUE, highlightRow = TRUE)
     })
 
     # Create a table of the user dataset
@@ -626,6 +632,8 @@ server <- function(input, output, session) {
         plotly_wblr(
             wblr_obj(),
             susp = susp_vec(),
+            suspplot = input$suspPlot,
+            restab = input$resTab,
             main = input$main,
             xlab = input$xlab,
             ylab = input$ylab,

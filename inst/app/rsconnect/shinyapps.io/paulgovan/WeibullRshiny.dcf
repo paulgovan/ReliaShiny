@@ -5,9 +5,9 @@ account: paulgovan
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 9115718
-bundleId: 7226296
+bundleId: 7301616
 url: https://paulgovan.shinyapps.io/WeibullRshiny/
-when: 1684269242.90822
-lastSyncTime: 1684269242.90825
+when: 1685850388.36989
+lastSyncTime: 1685850388.36992
 asMultiple: FALSE
 asStatic: FALSE

@@ -4,9 +4,6 @@
     <loc>https://paulgovan.github.io/WeibullR.shiny/404.html</loc>
   </url>
   <url>
-    <loc>https://paulgovan.github.io/WeibullR.shiny/LICENSE-text.html</loc>
-  </url>
-  <url>
     <loc>https://paulgovan.github.io/WeibullR.shiny/ReadMe.html</loc>
   </url>
   <url>
@@ -23,11 +20,5 @@
   </url>
   <url>
     <loc>https://paulgovan.github.io/WeibullR.shiny/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://paulgovan.github.io/WeibullR.shiny/reference/plotly_contour.html</loc>
-  </url>
-  <url>
-    <loc>https://paulgovan.github.io/WeibullR.shiny/reference/plotly_wblr.html</loc>
   </url>
 </urlset>

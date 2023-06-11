@@ -209,7 +209,22 @@ ui <- shinydashboard::dashboardPage(
                                             c(
                                                 "Weibull 2P" = "weibull",
                                                 "Weibull 3P" = "weibull3p",
+                                                # "Weibayes" = "weibayes",
                                                 "Lognormal" = "lognormal"
+                                            )
+                                        ),
+                                        # Conditional panel for 1P Weibull
+                                        shiny::conditionalPanel(
+                                            condition = "input.dist == 'weibayes'",
+
+                                            # 1P Weibull Beta
+                                            shiny::numericInput(
+                                                inputId = "beta",
+                                                h5("Beta:"),
+                                                value = 1,
+                                                min = 0.1,
+                                                max = 10,
+                                                step = 0.1
                                             )
                                         ),
                                         # Method input
@@ -527,8 +542,7 @@ server <- function(input, output, session) {
             DF = dat()
         }
 
-        rhandsontable::rhandsontable(DF, readOnly = TRUE) %>%
-            rhandsontable::hot_table(highlightCol = TRUE, highlightRow = TRUE)
+        rhandsontable::rhandsontable(DF, readOnly = TRUE)
     })
 
     # Create a table of the user dataset
@@ -583,19 +597,39 @@ server <- function(input, output, session) {
                 )
         )
 
-        # Run the wblr object
-        wblr_obj <-
-            WeibullR::wblr.conf(WeibullR::wblr.fit(
-                WeibullR::wblr(
-                    x = wblr_dat(),
-                    interval = ints_dat(),
-                    pp = input$pp
+        # Run the wblr object (Weibayes)
+        if (input$dist == "weibayes") {
+
+            wblr_obj <-
+                WeibullR::wblr.fit(
+                    WeibullR::wblr(
+                        x = wblr_dat(),
+                        interval = ints_dat(),
+                        pp = input$pp
+                    ),
+                    method.fit = input$dist,
+                    weibayes.beta = input$beta
+
+                )
+        }
+
+        # Run the wblr object (non-Weibayes)
+        else {
+
+            wblr_obj <-
+                WeibullR::wblr.conf(WeibullR::wblr.fit(
+                    WeibullR::wblr(
+                        x = wblr_dat(),
+                        interval = ints_dat(),
+                        pp = input$pp
+                    ),
+                    dist = input$dist,
+                    method.fit = input$meth
                 ),
-                dist = input$dist,
-                method.fit = input$meth
-            ),
-            method.conf = input$conf,
-            ci = input$cl)
+                method.conf = input$conf,
+                ci = input$cl)
+
+        }
     })
 
     # Create a suspensions vector
@@ -629,7 +663,7 @@ server <- function(input, output, session) {
         if (is.null(wblr_obj()))
             return(NULL)
 
-        plotly_wblr(
+        WeibullR.plotly::plotly_wblr(
             wblr_obj(),
             susp = susp_vec(),
             suspplot = input$suspPlot,
@@ -655,7 +689,7 @@ server <- function(input, output, session) {
                 "Contour plots are only available for the 'LRB' confidence method..."
             )
         )
-        plotly_contour(
+        WeibullR.plotly::plotly_contour(
             wblr_obj(),
             main = input$main2,
             xlab = input$xlab2,

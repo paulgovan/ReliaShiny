@@ -1,3 +1,4 @@
+library(magrittr)
 library(plotly)
 library(rhandsontable)
 library(WeibullR)

@@ -1,3 +1,4 @@
+require(magrittr)
 require(plotly)
 require(rhandsontable)
 require(WeibullR)

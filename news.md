@@ -1,9 +1,8 @@
-# WeibullR.shiny 0.1.1
+# WeibullR.shiny v0.1.1
 
-## Maintenance release
-* Update dependencies
+## Updates and minor improvements
+* Updated dependencies
 * UI improvements
-* Update docs
 
 # WeibullR.shiny v0.1
 

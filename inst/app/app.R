@@ -372,7 +372,7 @@ ui <- shinydashboard::dashboardPage(
                                                                     selected = "lightgray"
                                                                 ),
                                                                 # Show grid
-                                                                shiny::checkboxInput("grid",
+                                                                shiny::checkboxInput("grid2",
                                                                                      label = "Show grid?",
                                                                                      value = TRUE),
                                                                 # Main title

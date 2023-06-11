@@ -1,15 +1,30 @@
 
 # WeibullR.shiny
 
+<!-- badges: start -->
+
+[![CRAN
+status](https://www.r-pkg.org/badges/version/WeibullR.shiny)](https://CRAN.R-project.org/package=WeibullR.shiny)
+![](http://cranlogs.r-pkg.org/badges/grand-total/WeibullR.shiny)
+![](http://cranlogs.r-pkg.org/badges/WeibullR.shiny) [![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![DOI](https://zenodo.org/badge/641128069.svg)](https://zenodo.org/badge/latestdoi/641128069)
+<!-- badges: end -->
+
 <img src="https://github.com/paulgovan/WeibullR.shiny/blob/master/inst/app/www/WeibullR.png?raw=true" style="width:25.0%" />
 
 A Shiny web application for life data analysis that depends on WeibullR,
-a R package for Weibull analysis.
+an R package for Weibull analysis.
 
 # Getting Started
 
-WeibullR.shiny is still in development. To install the developmental
-version in R:
+To install WeibullR.shiny in R:
+
+``` r
+install.packages("WeibullR.shiny")
+```
+
+To install the development version:
 
 ``` r
 devtools::install_github('paulgovan/weibullr.shiny')

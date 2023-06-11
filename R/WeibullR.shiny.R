@@ -8,6 +8,7 @@
 #' @import WeibullR.plotly
 #' @export
 #' @seealso \url{https://paulgovan.github.io/WeibullR.shiny/}
+#' @return This function does not return a value.
 #' @examples
 #' if (interactive()) {
 #'   WeibullR.shiny()

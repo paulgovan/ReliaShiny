@@ -6,6 +6,9 @@
 \usage{
 WeibullR.shiny()
 }
+\value{
+This function does not return a value.
+}
 \description{
 WeibullR.shiny is a Shiny web app for Weibull Analysis from WeibullR.
 }

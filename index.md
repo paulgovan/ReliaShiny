@@ -18,7 +18,7 @@ A Shiny web application for life data analysis that depends on WeibullR, an R pa
 
 To install WeibullR.shiny in R:
 
-```{r, eval=FALSE}
+```r
 install.packages("WeibullR.shiny")
 ```
 

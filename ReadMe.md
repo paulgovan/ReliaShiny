@@ -76,7 +76,7 @@ before, there are other plot options for configuring the contour plot.
 ## More Resources
 
 For more info on WeibullR.plotly, visit
-[paulgovan.github.io/WeibullR.plotly/](https://paulgovan.github.io/WeibullR.plotly/)
+[WeibullR.plotly](https://paulgovan.github.io/WeibullR.plotly/)
 
 For an interactive introduction to Life Data Analysis, check out
 [WeibullR.learnr](https://paulgovan.github.io/WeibullR.learnr/)

@@ -1,3 +1,7 @@
+`%then%` <- function(a, b) {
+    if (is.null(a)) b else a
+}
+
 ui <- shinydashboard::dashboardPage(
     skin = "red",
     shinydashboard::dashboardHeader(title = "WeibullR.shiny"),
@@ -189,7 +193,7 @@ ui <- shinydashboard::dashboardPage(
                                             title = "Data Table",
                                             width = NULL,
                                             collapsible = TRUE,
-                                            rhandsontable::rHandsontableOutput("hot")
+                                            DT::DTOutput("table")
                                         )
                                     )
                                 )),
@@ -399,10 +403,6 @@ ui <- shinydashboard::dashboardPage(
     ))
 )
 
-`%then%` <- function(a, b) {
-    if (is.null(a)) b else a
-}
-
 server <- function(input, output, session) {
 
     # Example Time-to-Failure data
@@ -412,7 +412,7 @@ server <- function(input, output, session) {
     output$failure_data <- shiny::downloadHandler(
         filename = "acid_gas_compressor.csv",
         content = function(file) {
-            write.csv(acid_gas_compressor, file)
+            write.csv(acid_gas_compressor, file, row.names = FALSE)
         }
     )
 
@@ -423,7 +423,7 @@ server <- function(input, output, session) {
     output$censored_data <- shiny::downloadHandler(
         filename = "treat6mp.csv",
         content = function(file) {
-            write.csv(treat6mp, file)
+            write.csv(treat6mp, file, row.names = FALSE)
         }
     )
 
@@ -528,7 +528,7 @@ server <- function(input, output, session) {
     })
 
     # Create a table of the user dataset
-    output$hot = rhandsontable::renderRHandsontable({
+    output$table = DT::renderDT({
         if (is.null(dat()))
             return(NULL)
 
@@ -536,13 +536,9 @@ server <- function(input, output, session) {
             shiny::need(!is.null(dat()), message = FALSE)
         )
 
-        if (!is.null(input$hot)) {
-            DF = rhandsontable::hot_to_r(input$hot)
-        } else {
-            DF = dat()
-        }
-
-        rhandsontable::rhandsontable(DF, readOnly = TRUE)
+        DT::datatable(dat(), rownames = FALSE, editable = FALSE,
+                      options = list(autoWidth = TRUE)
+                      )
     })
 
     # Create a table of the user dataset

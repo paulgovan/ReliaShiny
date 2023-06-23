@@ -3,6 +3,5 @@
 export(WeibullR.shiny)
 import(WeibullR)
 import(WeibullR.plotly)
-import(rhandsontable)
 import(shiny)
 import(shinydashboard)

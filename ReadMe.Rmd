@@ -68,6 +68,7 @@ Finally, click on the Contour Plot tab to build a contour plot. As before, there
 
 ## More Resources
 
-For more info on WeibullR.plotly, visit [paulgovan.github.io/WeibullR.plotly/](https://paulgovan.github.io/WeibullR.plotly/)
+[WeibullR.plotly](https://paulgovan.github.io/WeibullR.plotly/) is a package for building interactive Weibull models. 
 
-For an interactive introduction to Life Data Analysis, check out [WeibullR.learnr](https://paulgovan.github.io/WeibullR.learnr/)
+[WeibullR.learnr](https://paulgovan.github.io/WeibullR.learnr/) is an interactive introduction to life data analysis.
+

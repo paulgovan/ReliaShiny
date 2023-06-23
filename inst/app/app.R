@@ -193,7 +193,7 @@ ui <- shinydashboard::dashboardPage(
                                             title = "Data Table",
                                             width = NULL,
                                             collapsible = TRUE,
-                                            DT::DTOutput("table")
+                                            shiny::tableOutput("table")
                                         )
                                     )
                                 )),
@@ -255,9 +255,22 @@ ui <- shinydashboard::dashboardPage(
                                             )
                                         ),
                                         # Confidence Method
-                                        shiny::selectInput(inputId = "conf",
-                                                           h5("Confidence Method:"),
-                                                           c("")),
+                                        # Conditional Panel for MLE
+                                        shiny::conditionalPanel(
+                                            condition = "input.meth == 'mle'",
+                                            shiny::selectInput(inputId = "mleConf",
+                                                               h5("Confidence Method:"),
+                                                               c("LRB" = "lrb",
+                                                                 "FM" = "fm",
+                                                                 "FMbounds" = "fmbounds"))
+                                        ),
+                                        # Conditional Panel for RR
+                                        shiny::conditionalPanel(
+                                            condition = "input.meth == 'rr-xony'",
+                                            shiny::selectInput(inputId = "rrConf",
+                                                               h5("Confidence Method:"),
+                                                               c("Pivotal-RR" = "pivotal-rr"))
+                                        ),
                                         shiny::sliderInput(inputId = "cl", h5("Confidence Level: "),
                                                            min = 0, max = 0.99, value = 0.9, step = 0.1)
                                     ),
@@ -405,6 +418,8 @@ ui <- shinydashboard::dashboardPage(
 
 server <- function(input, output, session) {
 
+    session$onSessionEnded(stopApp)
+
     # Example Time-to-Failure data
     acid_gas_compressor <- read.csv('data/acid_gas_compressor.csv')
 
@@ -528,7 +543,7 @@ server <- function(input, output, session) {
     })
 
     # Create a table of the user dataset
-    output$table = DT::renderDT({
+    output$table = shiny::renderTable({
         if (is.null(dat()))
             return(NULL)
 
@@ -536,10 +551,8 @@ server <- function(input, output, session) {
             shiny::need(!is.null(dat()), message = FALSE)
         )
 
-        DT::datatable(dat(), rownames = FALSE, editable = FALSE,
-                      options = list(autoWidth = TRUE)
-                      )
-    })
+        dat()
+    }, striped = TRUE, hover = TRUE, bordered = TRUE, align = 'c')
 
     # Create a table of the user dataset
     # output$table <- DT::renderDT({
@@ -593,6 +606,10 @@ server <- function(input, output, session) {
                 )
         )
 
+        # Get the confidence method
+        if (input$meth == "mle") confMeth <- input$mleConf
+        else confMeth = input$rrConf
+
         # Run the wblr object (Weibayes)
         if (input$dist == "weibayes") {
 
@@ -622,7 +639,7 @@ server <- function(input, output, session) {
                     dist = input$dist,
                     method.fit = input$meth
                 ),
-                method.conf = input$conf,
+                method.conf = confMeth,
                 ci = input$cl)
 
         }
@@ -636,22 +653,6 @@ server <- function(input, output, session) {
             # susp_vec <- NULL
             susp_vec <- as.numeric(unlist(subset(wblr_dat(), event == 0, select = 'time')))
         }
-    })
-
-    # Get the applicable confidence methods
-    confMeth <- shiny::reactive({
-        if (input$meth == "mle") {
-            confMeth <- c("LRB" = "lrb",
-                          "FM" = "fm",
-                          "FMbounds" = "fmbounds")
-        } else {
-            confMeth <- c("Pivotal-RR" = "pivotal-rr")
-        }
-    })
-
-    # Send the confidence method choices to the user
-    shiny::observe({
-        shiny::updateSelectInput(session, "conf", choices = confMeth())
     })
 
     # Build the probability plot

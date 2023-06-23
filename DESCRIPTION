@@ -7,7 +7,6 @@ Description: A 'Shiny' web application for life data analysis that depends on 'W
   <https://CRAN.R-project.org/package=WeibullR>, an R package for Weibull analysis.
 License: Apache License
 Imports:
-  rhandsontable,
   WeibullR,
   WeibullR.plotly,
   shiny,

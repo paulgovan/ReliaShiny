@@ -1,6 +1,3 @@
-require(magrittr)
-require(plotly)
-require(rhandsontable)
 require(WeibullR)
 require(WeibullR.plotly)
 require(shiny)

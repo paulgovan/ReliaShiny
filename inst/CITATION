@@ -1,0 +1,13 @@
+citHeader("To cite WeibullR.shiny in publications use:")
+
+citEntry(
+  entry    = "Manual",
+  title    = "WeibullR.shiny: A Shiny App for Weibull Analysis from WeibullR",
+  author   = "Paul Govan",
+  year     = "2023",
+  note     = "R package version 0.1.2",
+  url      = "https://paulgovan.github.io/WeibullR.shiny/",
+  textVersion = paste(
+
+  )
+)

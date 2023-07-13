@@ -211,11 +211,12 @@ ui <- shinydashboard::dashboardPage(
                                             inputId = "dist",
                                             h5("Distribution:"),
                                             c(
+                                                # "Weibayes" = "weibayes",
                                                 "Weibull 2P" = "weibull",
                                                 "Weibull 3P" = "weibull3p",
-                                                # "Weibayes" = "weibayes",
                                                 "Lognormal" = "lognormal"
-                                            )
+                                            ),
+                                            selected = "weibull"
                                         ),
                                         # Conditional panel for 1P Weibull
                                         shiny::conditionalPanel(

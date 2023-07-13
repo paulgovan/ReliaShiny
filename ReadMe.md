@@ -73,6 +73,10 @@ before, there are other plot options for configuring the contour plot.
 
 ![](https://github.com/paulgovan/WeibullR.shiny/blob/master/inst/images/ContPlot.png?raw=true)
 
+## Code of Conduct
+
+Please note that the WeibullR.shiny project is released with a [Contributor Code of Conduct](https://paulgovan.github.io/WeibullR.shiny/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
+
 ## More Resources
 
 For more info on WeibullR.plotly, visit

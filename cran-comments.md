@@ -1,5 +1,10 @@
+## Test environments
+* local OS X install, R 4.2.3
+* win-builder (devel and release)
+
 ## R CMD check results
+There were no ERRORs or WARNINGs or NOTEs
 
-0 errors | 0 warnings | 1 note
+## Downstream dependencies
+There are currently no downstream dependencies.
 
-* This is a new release.

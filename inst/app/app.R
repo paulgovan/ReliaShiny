@@ -290,10 +290,24 @@ ui <- shinydashboard::dashboardPage(
                                                     collapsed = TRUE,
                                                     collapsible = TRUE,
                                                     solidHeader = TRUE,
-                                                    # Plot color
+                                                    # Probability color
                                                     shiny::selectInput(
-                                                        inputId = "col",
-                                                        h5("Plot Color:"),
+                                                        inputId = "probcol",
+                                                        h5("Probability Points Color:"),
+                                                        c("black",
+                                                          "blue",
+                                                          "red",
+                                                          "yellow",
+                                                          "green",
+                                                          "orange",
+                                                          "violet"
+                                                        ),
+                                                        selected = "black"
+                                                    ),
+                                                    # Fit color
+                                                    shiny::selectInput(
+                                                        inputId = "fitcol",
+                                                        h5("Fit Color:"),
                                                         c("blue",
                                                           "red",
                                                           "yellow",
@@ -303,7 +317,19 @@ ui <- shinydashboard::dashboardPage(
                                                         ),
                                                         selected = "blue"
                                                     ),
-
+                                                    # CB color
+                                                    shiny::selectInput(
+                                                        inputId = "confcol",
+                                                        h5("Confidence Bounds Color:"),
+                                                        c("blue",
+                                                          "red",
+                                                          "yellow",
+                                                          "green",
+                                                          "orange",
+                                                          "violet"
+                                                        ),
+                                                        selected = "blue"
+                                                    ),
                                                     # Grid color
                                                     shiny::selectInput(
                                                         inputId = "gridcol",
@@ -337,6 +363,10 @@ ui <- shinydashboard::dashboardPage(
                                                         h5("Significant Digits:"),
                                                         value = 3
                                                     ),
+                                                    # Show CB
+                                                    # shiny::checkboxInput("confBounds",
+                                                    #                      label = "Show confidence bounds?",
+                                                    #                      value = TRUE),
                                                     # Show suspensions plot
                                                     shiny::checkboxInput("suspPlot",
                                                                          label = "Show suspensions plot?",
@@ -664,14 +694,16 @@ server <- function(input, output, session) {
         WeibullR.plotly::plotly_wblr(
             wblr_obj(),
             susp = susp_vec(),
-            suspplot = input$suspPlot,
-            restab = input$resTab,
+            showSusp = input$suspPlot,
+            showRes = input$resTab,
             main = input$main,
             xlab = input$xlab,
             ylab = input$ylab,
-            col = input$col,
-            gridcol = input$gridcol,
-            grid = input$grid,
+            probCol = input$probcol,
+            fitCol = input$fitcol,
+            confCol = input$confcol,
+            gridCol = input$gridcol,
+            showGrid = input$grid,
             signif = input$signif
         )
 
@@ -683,9 +715,13 @@ server <- function(input, output, session) {
             return(NULL)
         shiny::validate(
             shiny::need(
-                try(input$conf == "lrb"),
-                "Contour plots are only available for the 'LRB' confidence method..."
-            )
+                try(input$meth == "mle"),
+                "Contour plots are only available for the ''MLE' estimation method..."
+            ) %then%
+                shiny::need(
+                    try(input$mleConf == 'lrb'),
+                    "Contour plots are only available for the 'LRB' confidence method..."
+                )
         )
         WeibullR.plotly::plotly_contour(
             wblr_obj(),
@@ -693,8 +729,8 @@ server <- function(input, output, session) {
             xlab = input$xlab2,
             ylab = input$ylab2,
             col = input$col2,
-            gridcol = input$gridcol2,
-            grid = input$grid2,
+            gridCol = input$gridcol2,
+            showGrid = input$grid2,
             signif = input$signif2
         )
     })

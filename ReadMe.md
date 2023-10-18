@@ -75,12 +75,15 @@ before, there are other plot options for configuring the contour plot.
 
 ## Code of Conduct
 
-Please note that the WeibullR.shiny project is released with a [Contributor Code of Conduct](https://paulgovan.github.io/WeibullR.shiny/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
+Please note that the WeibullR.shiny project is released with a
+[Contributor Code of
+Conduct](https://paulgovan.github.io/WeibullR.shiny/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
 
 ## More Resources
 
-For more info on WeibullR.plotly, visit
-[WeibullR.plotly](https://paulgovan.github.io/WeibullR.plotly/)
+[WeibullR.plotly](https://paulgovan.github.io/WeibullR.plotly/) is a
+package for building interactive Weibull models.
 
-For an interactive introduction to Life Data Analysis, check out
-[WeibullR.learnr](https://paulgovan.github.io/WeibullR.learnr/)
+[WeibullR.learnr](https://paulgovan.github.io/WeibullR.learnr/) is an
+interactive introduction to life data analysis.

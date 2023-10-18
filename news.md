@@ -1,4 +1,8 @@
-# WeibullR.shiny (development version)
+# WeibullR.plotly 0.2
+
+## Minor improvements and fixes
+* Now with a lognormal plotting canvas.
+* More plotting options.
 
 # WeibullR.shiny v0.1.2
 

@@ -1,3 +1,5 @@
+# WeibullR.shiny 0.2.0
+
 # WeibullR.plotly 0.2
 
 ## Minor improvements and fixes

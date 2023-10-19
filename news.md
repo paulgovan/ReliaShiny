@@ -1,3 +1,5 @@
+# WeibullR.shiny (development version)
+
 # WeibullR.shiny 0.2.0
 
 # WeibullR.shiny 0.2

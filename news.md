@@ -1,6 +1,6 @@
 # WeibullR.shiny 0.2.0
 
-# WeibullR.plotly 0.2
+# WeibullR.shiny 0.2
 
 ## Minor improvements and fixes
 * Now with a lognormal plotting canvas.

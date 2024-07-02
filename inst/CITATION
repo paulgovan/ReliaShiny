@@ -8,5 +8,5 @@ bibentry(
   year     = "2023",
   note     = "R package version 0.2.0",
   url      = "https://CRAN.R-project.org/package=WeibullR.shiny",
-  doi      = "10.5281/zenodo.8039639",
+  doi      = "10.32614/CRAN.package.WeibullR.shiny",
 )

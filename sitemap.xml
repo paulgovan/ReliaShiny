@@ -1,27 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://paulgovan.github.io/WeibullR.shiny/404.html</loc>
-  </url>
-  <url>
-    <loc>https://paulgovan.github.io/WeibullR.shiny/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>https://paulgovan.github.io/WeibullR.shiny/ReadMe.html</loc>
-  </url>
-  <url>
-    <loc>https://paulgovan.github.io/WeibullR.shiny/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://paulgovan.github.io/WeibullR.shiny/index.html</loc>
-  </url>
-  <url>
-    <loc>https://paulgovan.github.io/WeibullR.shiny/news.html</loc>
-  </url>
-  <url>
-    <loc>https://paulgovan.github.io/WeibullR.shiny/reference/WeibullR.shiny.html</loc>
-  </url>
-  <url>
-    <loc>https://paulgovan.github.io/WeibullR.shiny/reference/index.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://paulgovan.github.io/WeibullR.shiny/404.html</loc></url>
+<url><loc>https://paulgovan.github.io/WeibullR.shiny/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://paulgovan.github.io/WeibullR.shiny/ReadMe.html</loc></url>
+<url><loc>https://paulgovan.github.io/WeibullR.shiny/authors.html</loc></url>
+<url><loc>https://paulgovan.github.io/WeibullR.shiny/index.html</loc></url>
+<url><loc>https://paulgovan.github.io/WeibullR.shiny/news.html</loc></url>
+<url><loc>https://paulgovan.github.io/WeibullR.shiny/reference/WeibullR.shiny.html</loc></url>
+<url><loc>https://paulgovan.github.io/WeibullR.shiny/reference/index.html</loc></url>
 </urlset>
+

@@ -15,3 +15,5 @@ Encoding: UTF-8
 RoxygenNote: 7.2.3
 URL: https://paulgovan.github.io/WeibullR.shiny/, https://github.com/paulgovan/WeibullR.shiny
 BugReports: https://github.com/paulgovan/WeibullR.shiny/issues
+Suggests: 
+    shinytest2

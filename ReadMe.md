@@ -11,7 +11,9 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [![DOI](https://zenodo.org/badge/641128069.svg)](https://zenodo.org/badge/latestdoi/641128069)
 <!-- badges: end -->
 
-<img src="https://github.com/paulgovan/WeibullR.shiny/blob/master/inst/app/www/WeibullR.png?raw=true" style="width:25.0%" />
+<img
+src="https://github.com/paulgovan/WeibullR.shiny/blob/master/inst/app/www/WeibullR.png?raw=true"
+style="width:25.0%" />
 
 A Shiny web application for life data analysis that depends on WeibullR,
 an R package for Weibull analysis.

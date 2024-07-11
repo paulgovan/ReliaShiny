@@ -1,10 +1,11 @@
-# WeibullR.shiny (development version)
+# WeibullR.shiny 0.2.1
 
-# WeibullR.shiny 0.2.0
+## Minor improvements and bug fixes
+* Updated contact info and citation.
 
 # WeibullR.shiny 0.2
 
-## Minor improvements and fixes
+## Minor improvements and bug fixes
 * Now with a lognormal plotting canvas.
 * More plotting options.
 

@@ -39,7 +39,7 @@ WeibullR.shiny::WeibullR.shiny()
 ```
 
 Or to access the app through a browser, visit
-[paulgovan.shinyapps.io/WeibullRshiny](paulgovan.shinyapps.io/WeibullRshiny).
+[paulgovan.shinyapps.io/WeibullRshiny](https://paulgovan.shinyapps.io/WeibullRshiny).
 
 # Example
 

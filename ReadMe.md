@@ -5,9 +5,11 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/WeibullR.shiny)](https://CRAN.R-project.org/package=WeibullR.shiny)
-![](http://cranlogs.r-pkg.org/badges/grand-total/WeibullR.shiny)
-![](http://cranlogs.r-pkg.org/badges/WeibullR.shiny) [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![CRAN
+checks](https://badges.cranchecks.info/summary/WeibullR.shiny.svg)](https://cran.r-project.org/web/checks/check_results_WeibullR.shiny.html)
+[![](http://cranlogs.r-pkg.org/badges/last-month/WeibullR.shiny)](https://cran.r-project.org/package=WeibullR.shiny)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/WeibullR.shiny)](https://cran.r-project.org/package=WeibullR.shiny)
+[![Lifecycle:experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![DOI](https://zenodo.org/badge/641128069.svg)](https://zenodo.org/badge/latestdoi/641128069)
 <!-- badges: end -->
 

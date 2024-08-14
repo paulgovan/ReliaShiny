@@ -79,24 +79,50 @@ ui <- shinydashboard::dashboardPage(
                                             title = "Data Input",
                                             width = NULL,
                                             collapsible = TRUE,
-                                            shiny::helpText("Upload your Time-to-Failure data:"),
-                                            # File input
-                                            shiny::fileInput(
+                                            shiny::helpText("Select a sample data set or upload your Time-to-Failure data:"),
+
+                                            shinyWidgets::radioGroupButtons(inputId = "dataInput",
+                                                                            choices = c("Sample Data" = 1,
+                                                                                        "Upload Data" = 2),
+                                                                            selected = 1,
+                                                                            justified = TRUE
+                                            ),
+
+                                            # Conditional panel for sample data selection
+                                            shiny::conditionalPanel(
+                                              condition = "input.dataInput == 1",
+
+                                              # Demo network input select
+                                              shiny::selectInput(
+                                                inputId = "dataSelect",
+                                                h5("Time-to-Failure Data:"),
+                                                c("End-of-Life Data" = 1,
+                                                  "Right Censored Data" = 2
+                                                )
+                                              )
+                                            ),
+
+                                            # Conditional panel for file input selection
+                                            shiny::conditionalPanel(
+                                              condition = "input.dataInput == 2",
+
+                                              shiny::helpText("Your data must be either a csv file containing at least 'time'
+                                                and 'event' columns and optionally a 'qty' column or a csv file
+                                                of interval data containing 'left' and 'right' columns."
+                                              ),
+
+                                              # File input
+                                              shiny::fileInput(
                                                 'file',
                                                 strong('File Input:'),
-                                                accept = c(
-                                                    'text/csv',
-                                                    'text/comma-separated-values',
-                                                    'text/tab-separated-values',
-                                                    'text/plain',
-                                                    '.csv',
-                                                    '.tsv'
+                                                accept = c('text/csv',
+                                                           'text/comma-separated-values',
+                                                           'text/tab-separated-values',
+                                                           'text/plain',
+                                                           '.csv',
+                                                           '.tsv'
                                                 )
-                                            ),
-                                            shiny::helpText(
-                                                "Your data must be either a csv file containing at least 'time'
-                  and 'event' columns and optionally a 'qty' column or a csv file
-                  of interval data containing 'left' and 'right' columns."
+                                              )
                                             )
                                         ),
                                         shinydashboard::box(
@@ -200,6 +226,8 @@ ui <- shinydashboard::dashboardPage(
                                     ),
                                     shiny::column(
                                       width = 3,
+                                        # Events value box
+                                        shiny::uiOutput("eventBox"),
                                         # Failures value box
                                         shiny::uiOutput("failBox"),
                                         # Suspensions value box
@@ -482,16 +510,39 @@ server <- function(input, output, session) {
         }
     )
 
-    # Get the data selection from the user
+    # Get the data selection from user
     dat <- shiny::reactive({
+      if (input$dataInput == 1) {
 
-        # Get the uploaded file from the user
+        if (input$dataSelect == 1) {
+          dat <- data.frame(read.csv('data/acid_gas_compressor.csv'))
+        } else if (input$dataSelect == 2) {
+          dat <- data.frame(read.csv('data/treat6mp.csv'))
+        }
+      } else if (input$dataInput == 2) {
+
+        # Get the uploaded file from user
         inFile <- input$file
         if (is.null(inFile))
-            return(NULL)
-
+          return(NULL)
         dat <- data.frame(read.csv(inFile$datapath))
+      }
+    })
 
+    # Create the failures value box
+    output$eventBox <- shiny::renderUI({
+
+      # Get the number of failures in the data set
+      if (is.null(dat())) {
+        events <- NULL
+      } else
+        events <- nrow(dat())
+
+      shinydashboard::valueBox(events,
+                               "Events",
+                               icon = shiny::icon("table"),
+                               color = "blue",
+                               width = 12)
     })
 
     # Create the failures value box

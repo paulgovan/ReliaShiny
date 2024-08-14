@@ -10,8 +10,10 @@ ui <- shinydashboard::dashboardPage(
     shinydashboard::dashboardSidebar(
         shinydashboard::sidebarMenu(
             shinydashboard::menuItem("Landing", tabName = "landing", icon = icon("helicopter-symbol")),
-            shinydashboard::menuItem("Data", tabName = "data", icon = icon("table")),
-            shinydashboard::menuItem("Modeling", tabName = "model", icon = icon("chart-line")),
+            shinydashboard::menuItem("Time-to-Failure", tabName = "ttf", icon = icon("th"),
+            shinydashboard::menuSubItem("Data", tabName = "data", icon = shiny::icon("table")),
+            shinydashboard::menuSubItem("Model", tabName = "model", icon = icon("chart-line"))
+            ),
             shiny::br(),
             shinydashboard::menuItem("Help", icon = icon("info-circle"), href = "https://paulgovan.github.io/WeibullR.shiny/"),
             shinydashboard::menuItem("Source Code", icon = icon("github"), href = "https://github.com/paulgovan/WeibullR.shiny"),
@@ -188,13 +190,20 @@ ui <- shinydashboard::dashboardPage(
                                         )
                                     ),
                                     shiny::column(
-                                        width = 9,
+                                        width = 6,
                                         shinydashboard::box(
                                             title = "Data Table",
                                             width = NULL,
                                             collapsible = TRUE,
                                             shiny::tableOutput("table")
                                         )
+                                    ),
+                                    shiny::column(
+                                      width = 3,
+                                        # Failures value box
+                                        shiny::uiOutput("failBox"),
+                                        # Suspensions value box
+                                        shiny::uiOutput("suspBox")
                                     )
                                 )),
 
@@ -483,6 +492,50 @@ server <- function(input, output, session) {
 
         dat <- data.frame(read.csv(inFile$datapath))
 
+    })
+
+    # Create the failures value box
+    output$failBox <- shiny::renderUI({
+
+      # Get the number of failures in the data set
+      if (is.null(dat())) {
+        failures <- NULL
+      } else if (is.null(input$event) || input$suspensions == 0) {
+        failures <- nrow(dat())
+      } else if (input$suspensions == 1) {
+        req(input$event)
+        event <- input$event
+        datsub <- dat()[dat()[[event]] == 1, ]
+        failures <- nrow(datsub)
+      }
+
+      shinydashboard::valueBox(failures,
+                               "Failures",
+                               icon = shiny::icon("arrow-down"),
+                               color = "red",
+                               width = 12)
+    })
+
+    # Create the suspensions value box
+    output$suspBox <- shiny::renderUI({
+
+      # Get the number of suspensions in the data set
+      if (is.null(dat())) {
+        suspensions <- NULL
+      } else if (is.null(input$event) || input$suspensions == 0) {
+          suspensions <- 0
+      } else if (input$suspensions == 1) {
+        req(input$event)
+        event <- input$event
+        datsub <- dat()[dat()[[event]] == 0, ]
+        suspensions <- nrow(datsub)
+      }
+
+      shinydashboard::valueBox(suspensions,
+                               "Suspensions",
+                               icon = shiny::icon("arrow-up"),
+                               color = "green",
+                               width = 12)
     })
 
     # Get the column names

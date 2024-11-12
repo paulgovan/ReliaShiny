@@ -15,7 +15,7 @@ Imports:
     shinyWidgets
 Encoding: UTF-8
 RoxygenNote: 7.3.2
-URL: https://paulgovan.github.io/WeibullR.shiny/, https://github.com/paulgovan/WeibullR.shiny
+URL: https://paulgovan.github.io/WeibullR.shiny/, https://github.com/paulgovan/WeibullR.shiny, https://govan.shinyapps.io/weibullrshiny/
 BugReports: https://github.com/paulgovan/WeibullR.shiny/issues
 Suggests: 
 <<<<<<< Updated upstream

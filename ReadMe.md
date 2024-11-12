@@ -45,7 +45,7 @@ WeibullR.shiny::WeibullR.shiny()
 ```
 
 Or to access the app through a browser, visit
-[paulgovan.shinyapps.io/WeibullRshiny](https://paulgovan.shinyapps.io/WeibullRshiny).
+[govan.shinyapps.io/weibullrshiny/](https://govan.shinyapps.io/weibullrshiny/).
 
 ## Code of Conduct
 

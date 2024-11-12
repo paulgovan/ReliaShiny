@@ -1,4 +1,6 @@
-require(WeibullR)
-require(WeibullR.plotly)
+require(ReliaGrowR)
 require(shiny)
 require(shinydashboard)
+require(shinyWidgets)
+require(WeibullR)
+require(WeibullR.plotly)

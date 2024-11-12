@@ -416,7 +416,7 @@ ui <- shinydashboard::dashboardPage(
                                                       circle = TRUE,
                                                       status = "danger",
                                                       icon = icon("gear"),
-                                                      tooltip = tooltipOptions(title = "Click to see plot options")
+                                                      tooltip = shinyWidgets::tooltipOptions(title = "Click to see plot options")
                                         ),
                                         plotly::plotlyOutput('probPlot')
                                         )

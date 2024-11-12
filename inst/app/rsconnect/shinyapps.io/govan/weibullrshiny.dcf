@@ -5,7 +5,7 @@ account: govan
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 13314265
-bundleId: 9352265
+bundleId: 9352374
 url: https://govan.shinyapps.io/weibullrshiny/
 version: 1
 asMultiple: FALSE

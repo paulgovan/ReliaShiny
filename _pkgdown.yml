@@ -1,4 +1,8 @@
 url: https://paulgovan.github.io/WeibullR.shiny/
 template:
   bootstrap: 5
+app:
+- name: WeibullRshiny
+  title: A Shiny App for Weibull Analysis
+  url: https://govan.shinyapps.io/weibullrshiny/
 

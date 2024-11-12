@@ -415,8 +415,7 @@ ui <- shinydashboard::dashboardPage(
                                                                              value = TRUE),
                                                       circle = TRUE,
                                                       status = "danger",
-                                                      icon = icon("gear"),
-                                                      tooltip = shinyWidgets::tooltipOptions(title = "Click to see plot options")
+                                                      icon = icon("gear")
                                         ),
                                         plotly::plotlyOutput('probPlot')
                                         )
@@ -480,8 +479,7 @@ ui <- shinydashboard::dashboardPage(
                                                                       ),
                                                                       circle = TRUE,
                                                                       status = "danger",
-                                                                      icon = icon("gear"),
-                                                                      tooltip = tooltipOptions(title = "Click to see plot options")
+                                                                      icon = icon("gear")
                                                                     ),
                                                                     plotly::plotlyOutput('contPlot')
                                                       )
@@ -719,8 +717,7 @@ ui <- shinydashboard::dashboardPage(
                                                                          value = "Cumulative Failures"),
                                                         circle = TRUE,
                                                         status = "danger",
-                                                        icon = icon("gear"),
-                                                        tooltip = tooltipOptions(title = "Click to see plot options")
+                                                        icon = icon("gear")
                                                       ),
                                                       plotly::plotlyOutput('growthPlot'),
                                                       br(),
@@ -797,8 +794,7 @@ ui <- shinydashboard::dashboardPage(
                                                                                        value = "Cumulative MTBF"),
                                                                       circle = TRUE,
                                                                       status = "danger",
-                                                                      icon = icon("gear"),
-                                                                      tooltip = tooltipOptions(title = "Click to see plot options")
+                                                                      icon = icon("gear")
                                                                     ), plotly::plotlyOutput('duanePlot')
                                                       )
                                                     )

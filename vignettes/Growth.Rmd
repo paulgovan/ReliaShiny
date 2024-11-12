@@ -1,5 +1,5 @@
 ---
-title: "Growth Analysis"
+title: "Reliability Growth Analysis"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Growth}

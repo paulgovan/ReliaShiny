@@ -1,8 +1,10 @@
 #' A Shiny Weibull Analysis App.
 #'
 #' WeibullR.shiny is a Shiny web app for Weibull Analysis from WeibullR.
+#' @import ReliaGrowR
 #' @import shiny
 #' @import shinydashboard
+#' @import shinyWidgets
 #' @import WeibullR
 #' @import WeibullR.plotly
 #' @export

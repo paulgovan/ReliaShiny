@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="index.html">WeibullR.shiny</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,6 +16,11 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="articles/Growth.html">Growth Analysis</a></li>
+    <li><a class="dropdown-item" href="articles/Weibull.html">Time-to-Failure Analysis</a></li>
+  </ul></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json"></form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/paulgovan/WeibullR.shiny/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -53,33 +58,7 @@
 <p>To launch the app:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">WeibullR.shiny</span><span class="fu">::</span><span class="fu"><a href="reference/WeibullR.shiny.html">WeibullR.shiny</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>Or to access the app through a browser, visit <a href="https://paulgovan.shinyapps.io/WeibullRshiny" class="external-link">paulgovan.shinyapps.io/WeibullRshiny</a>.</p>
-</div>
-<div class="section level1">
-<h1 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a></h1>
-<div class="section level2">
-<h2 id="landing">Landing<a class="anchor" aria-label="anchor" href="#landing"></a></h2>
-<p>Upon launching the app, you’ll be greeted by the Landing page. From here, you can:</p>
-<ul><li>Access this README.</li>
-<li>Download an example dataset.</li>
-<li>Navigate to the Data tab.</li>
-</ul><p><img src="https://github.com/paulgovan/WeibullR.shiny/blob/master/inst/images/Landing.png?raw=true"></p>
-</div>
-<div class="section level2">
-<h2 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a></h2>
-<p>For demonstration, we’ll use the “Time-to-Failure” dataset. First, download the dataset from the Landing page. Then, use the Data Input option in the Data tab to upload it to the app.</p>
-<p>At this stage, your app should resemble the following:</p>
-<p><img src="https://github.com/paulgovan/WeibullR.shiny/blob/master/inst/images/Data.png?raw=true"></p>
-<p>You can explore additional options for data arrangement, but for this example, we’ll proceed with the default settings.</p>
-</div>
-<div class="section level2">
-<h2 id="modeling">Modeling<a class="anchor" aria-label="anchor" href="#modeling"></a></h2>
-<p>Next, navigate to the Modeling tab to build your Weibull model. The app will generate a Probability Plot using default settings. Feel free to experiment with different configurations to tailor the model to your needs.</p>
-<p>Below the plot, you’ll find additional settings for further customization.</p>
-<p><img src="https://github.com/paulgovan/WeibullR.shiny/blob/master/inst/images/ProbPlot.png?raw=true"></p>
-<p>Finally, visit the Contour Plot tab to create a contour plot. As with the previous plot, various customization options are available.</p>
-<p><img src="https://github.com/paulgovan/WeibullR.shiny/blob/master/inst/images/ContPlot.png?raw=true"></p>
-</div>
+<p>Or to access the app through a browser, visit <a href="https://govan.shinyapps.io/weibullrshiny/" class="external-link">govan.shinyapps.io/weibullrshiny/</a>.</p>
 <div class="section level2">
 <h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a></h2>
 <p>Please note that the WeibullR.shiny project is released with a <a href="https://paulgovan.github.io/WeibullR.shiny/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
@@ -101,7 +80,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer></div>

@@ -18,7 +18,12 @@ RoxygenNote: 7.3.2
 URL: https://paulgovan.github.io/WeibullR.shiny/, https://github.com/paulgovan/WeibullR.shiny
 BugReports: https://github.com/paulgovan/WeibullR.shiny/issues
 Suggests: 
+<<<<<<< Updated upstream
     knitr,
     rmarkdown,
     shinytest2
 VignetteBuilder: knitr
+=======
+    shinytest2,
+    WeibullR.learnr
+>>>>>>> Stashed changes

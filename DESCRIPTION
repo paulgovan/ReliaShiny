@@ -1,7 +1,7 @@
 Package: WeibullR.shiny
 Type: Package
-Title: A 'Shiny' App for Weibull Analysis from 'WeibullR'
-Version: 0.2.1
+Title: A 'Shiny' App for Weibull Analysis
+Version: 0.3
 Authors@R: person("Paul", "Govan", email = "paul.govan2@gmail.com", role = c("aut", "cre", "cph"), comment = c(ORCID = "0000-0002-1821-8492"))
 Description: A 'Shiny' web application for life data analysis that depends on 'WeibullR' by David Silkworth and Jurgen Symynck (2022) 
   <https://CRAN.R-project.org/package=WeibullR>, an R package for Weibull analysis.
@@ -23,4 +23,3 @@ Suggests:
     rmarkdown,
     shinytest2,
     WeibullR.learnr
-VignetteBuilder: knitr

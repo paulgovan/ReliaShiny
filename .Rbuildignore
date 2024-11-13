@@ -16,3 +16,5 @@
 ^CRAN-SUBMISSION$
 ^CODE_OF_CONDUCT\.md$
 _\.new\.png$
+^vignettes$
+^inst/images$

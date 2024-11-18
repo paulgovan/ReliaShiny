@@ -728,6 +728,14 @@ ui <- shinydashboard::dashboardPage(
                                                           solidHeader = TRUE,
                                                           shiny::verbatimTextOutput("betaValues")
                                                         )
+                                                      ),
+                                                      # Lambda value(s)
+                                                      shiny::fluidRow(
+                                                        shinydashboard::box(
+                                                          title = "Lambda Value(s)",
+                                                          solidHeader = TRUE,
+                                                          shiny::verbatimTextOutput("lambdaValues")
+                                                        )
                                                       )
                                         )
                                       )
@@ -1332,15 +1340,26 @@ server <- function(input, output, session) {
     })
 
     # Get the selected node measure from the user and print the results
-    output$betaValues <- shiny::renderText({
+    output$betaValues <- shiny::renderPrint({
       if (is.null(rga_obj()))
         return(NULL)
       else {
-        as.character(
-          round(
-          rga_obj()$betas, 4
-          )
-        )
+        if (input$growthModel == 1) {
+          print(rga_obj()$betas)
+        } else
+          print(rga_obj()$betas$log_times)
+      }
+    })
+
+    # Get the selected node measure from the user and print the results
+    output$lambdaValues <- shiny::renderPrint({
+      if (is.null(rga_obj()))
+        return(NULL)
+      else {
+        if (input$growthModel == 1) {
+          print(rga_obj()$lambdas)
+        } else
+          print(rga_obj()$lambdas$log_times)
       }
     })
 

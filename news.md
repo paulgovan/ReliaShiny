@@ -1,3 +1,7 @@
+# WeibullR.shiny v0.3.1
+
+## Minor improvements and bug fixes
+
 # WeibullR.shiny v0.3
 
 * Now with support for Reliability Growth Analysis including Crow-AMSAA, Piecewise Weibull NHPP, Change Point Detection, and Duane models.

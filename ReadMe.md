@@ -19,7 +19,10 @@ style="width:25.0%" />
 
 # Introduction
 
-Welcome to **WeibullR.shiny!** This package is a shiny web application for Weibull analysis. The app has an intuitive interface for performing reliability analysis, making it accessible for users with varying levels of experience.
+Welcome to **WeibullR.shiny!** This package is a shiny web application
+for Weibull analysis. The app has an intuitive interface for performing
+reliability analysis, making it accessible for users with varying levels
+of experience.
 
 # Getting Started
 
@@ -41,7 +44,9 @@ To launch the app:
 WeibullR.shiny::WeibullR.shiny()
 ```
 
-![](https://github.com/paulgovan/WeibullR.shiny/blob/master/inst/images/Landing.png?raw=true){width=100%}
+<img
+src="https://github.com/paulgovan/WeibullR.shiny/blob/master/inst/images/Landing.png?raw=true"
+style="width:100.0%" />
 
 Or to access the app through a browser, visit
 [govan.shinyapps.io/weibullrshiny/](https://govan.shinyapps.io/weibullrshiny/).

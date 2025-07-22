@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   Growth: Growth.html
   Weibull: Weibull.html
-last_built: 2025-07-20T22:46Z
+last_built: 2025-07-22T01:11Z
 urls:
   reference: https://paulgovan.github.io/WeibullR.shiny/reference
   article: https://paulgovan.github.io/WeibullR.shiny/articles

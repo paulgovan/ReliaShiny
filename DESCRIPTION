@@ -21,4 +21,4 @@ Suggests:
     knitr,
     rmarkdown,
     shinytest2,
-    ReliaLearnR
+    WeibullR.learnr

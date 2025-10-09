@@ -1,10 +1,9 @@
-Package: WeibullR.shiny
+Package: ReliaShiny
 Type: Package
-Title: A 'Shiny' App for Weibull Analysis
+Title: A 'Shiny' App for Reliability Analysis
 Version: 0.3.1
 Authors@R: person("Paul", "Govan", email = "paul.govan2@gmail.com", role = c("aut", "cre", "cph"), comment = c(ORCID = "0000-0002-1821-8492"))
-Description: A 'Shiny' web application for life data analysis that depends on 'WeibullR' by David Silkworth and Jurgen Symynck (2022) 
-  <https://CRAN.R-project.org/package=WeibullR>, an R package for Weibull analysis.
+Description: A 'Shiny' web application for life data analysis.
 License: Apache License
 Imports:
     magrittr,
@@ -15,11 +14,11 @@ Imports:
     shinydashboard,
     shinyWidgets
 Encoding: UTF-8
-RoxygenNote: 7.3.2
-URL: https://paulgovan.github.io/WeibullR.shiny/, https://github.com/paulgovan/WeibullR.shiny, https://govan.shinyapps.io/weibullrshiny/
-BugReports: https://github.com/paulgovan/WeibullR.shiny/issues
+RoxygenNote: 7.3.3
+URL: https://paulgovan.github.io/ReliaShiny/, https://github.com/paulgovan/ReliaShiny, https://govan.shinyapps.io/weibullrshiny/
+BugReports: https://github.com/paulgovan/ReliaShiny/issues
 Suggests: 
     knitr,
     rmarkdown,
     shinytest2,
-    WeibullR.learnr
+    ReliaLearnR

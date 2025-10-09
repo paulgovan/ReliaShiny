@@ -4,13 +4,13 @@
 
 ui <- shinydashboard::dashboardPage(
     skin = "red",
-    shinydashboard::dashboardHeader(title = "WeibullR.shiny"),
+    shinydashboard::dashboardHeader(title = "ReliaShiny"),
 
     ## Sidebar content
     shinydashboard::dashboardSidebar(
         shinydashboard::sidebarMenu(
             shinydashboard::menuItem("Landing", tabName = "landing", icon = icon("helicopter-symbol")),
-            shinydashboard::menuItem("Time-to-Failure", tabName = "ttf", icon = icon("th"),
+            shinydashboard::menuItem("Life Data", tabName = "ttf", icon = icon("th"),
               shinydashboard::menuSubItem("Data", tabName = "data", icon = shiny::icon("table")),
               shinydashboard::menuSubItem("Model", tabName = "model", icon = icon("chart-line"))
             ),
@@ -19,8 +19,8 @@ ui <- shinydashboard::dashboardPage(
               shinydashboard::menuSubItem("Model", tabName = "growthModel", icon = icon("chart-line"))
             ),
             shiny::br(),
-            shinydashboard::menuItem("Help", icon = icon("info-circle"), href = "https://paulgovan.github.io/WeibullR.shiny/"),
-            shinydashboard::menuItem("Source Code", icon = icon("github"), href = "https://github.com/paulgovan/WeibullR.shiny"),
+            shinydashboard::menuItem("Help", icon = icon("info-circle"), href = "https://paulgovan.github.io/ReliaShiny/"),
+            shinydashboard::menuItem("Source Code", icon = icon("github"), href = "https://github.com/paulgovan/ReliaShiny"),
             shiny::br(),
             shiny::bookmarkButton()
         )
@@ -39,16 +39,16 @@ ui <- shinydashboard::dashboardPage(
                                             height = 200,
                                             width = 173
                                         ),
-                                        shiny::h2("WeibullR.shiny"),
+                                        shiny::h2("ReliaShiny"),
                                         shiny::h3(
                                             "A ",
                                             shiny::a(href = 'http://shiny.rstudio.com', 'Shiny'),
-                                            "app for Weibull Analysis"
+                                            "app for Reliability Analysis"
                                             ),
                                         shiny::br(),
                                         shiny::h4(
                                             "For help getting started, view the ",
-                                            shiny::a(href = 'https://paulgovan.github.io/WeibullR.shiny/', 'Project Site')
+                                            shiny::a(href = 'https://paulgovan.github.io/ReliaShiny/', 'Project Site')
                                             ),
                                         shiny::h4(
                                             "To download an example data set, choose from the following: ",

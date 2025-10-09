@@ -1,67 +1,59 @@
 
-# WeibullR.shiny
+# ReliaShiny
 
 <!-- badges: start -->
 
 [![CRAN
-status](https://www.r-pkg.org/badges/version/WeibullR.shiny)](https://CRAN.R-project.org/package=WeibullR.shiny)
+status](https://www.r-pkg.org/badges/version/ReliaShiny)](https://CRAN.R-project.org/package=ReliaShiny)
 [![CRAN
-checks](https://badges.cranchecks.info/summary/WeibullR.shiny.svg)](https://cran.r-project.org/web/checks/check_results_WeibullR.shiny.html)
-[![](http://cranlogs.r-pkg.org/badges/last-month/WeibullR.shiny)](https://cran.r-project.org/package=WeibullR.shiny)
-[![](http://cranlogs.r-pkg.org/badges/grand-total/WeibullR.shiny)](https://cran.r-project.org/package=WeibullR.shiny)
+checks](https://badges.cranchecks.info/summary/ReliaShiny.svg)](https://cran.r-project.org/web/checks/check_results_ReliaShiny.html)
+[![](http://cranlogs.r-pkg.org/badges/last-month/ReliaShiny)](https://cran.r-project.org/package=ReliaShiny)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/ReliaShiny)](https://cran.r-project.org/package=ReliaShiny)
 [![Lifecycle:experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![](https://img.shields.io/badge/doi-10.32614/CRAN.package.WeibullR.shiny-green.svg)](https://doi.org/10.32614/CRAN.package.WeibullR.shiny)
+[![](https://img.shields.io/badge/doi-10.32614/CRAN.package.ReliaShiny-green.svg)](https://doi.org/10.32614/CRAN.package.ReliaShiny)
 <!-- badges: end -->
 
 <img
-src="https://github.com/paulgovan/WeibullR.shiny/blob/master/inst/app/www/WeibullR.png?raw=true"
+src="https://github.com/paulgovan/ReliaShiny/blob/master/inst/app/www/WeibullR.png?raw=true"
 style="width:25.0%" />
 
 # Introduction
 
-Welcome to **WeibullR.shiny!** This package is a shiny web application
-for Weibull analysis. The app has an intuitive interface for performing
-reliability analysis, making it accessible for users with varying levels
-of experience.
+Welcome to **ReliaShiny!** ReliaShiny is an interactive web application
+for reliability analysis. It is designed to be user-friendly and
+accessible to both beginners and experienced practitioners in the field
+of reliability engineering.
 
 # Getting Started
 
-To install WeibullR.shiny in R:
+To install ReliaShiny in R:
 
 ``` r
-install.packages("WeibullR.shiny")
+install.packages("ReliaShiny")
 ```
 
 To install the development version:
 
 ``` r
-devtools::install_github('paulgovan/weibullr.shiny')
+devtools::install_github('paulgovan/ReliaShiny')
 ```
 
 To launch the app:
 
 ``` r
-WeibullR.shiny::WeibullR.shiny()
+ReliaShiny::ReliaShiny()
 ```
 
 <img
-src="https://github.com/paulgovan/WeibullR.shiny/blob/master/inst/images/Landing.png?raw=true"
+src="https://github.com/paulgovan/ReliaShiny/blob/master/inst/images/Landing.png?raw=true"
 style="width:100.0%" />
 
 Or to access the app through a browser, visit
-[govan.shinyapps.io/weibullrshiny/](https://govan.shinyapps.io/weibullrshiny/).
+[govan.shinyapps.io/reliashiny/](https://govan.shinyapps.io/reliashiny/).
 
 ## Code of Conduct
 
-Please note that the WeibullR.shiny project is released with a
-[Contributor Code of
-Conduct](https://paulgovan.github.io/WeibullR.shiny/CODE_OF_CONDUCT.html).
+Please note that the ReliaShiny project is released with a [Contributor
+Code of
+Conduct](https://paulgovan.github.io/ReliaShiny/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.
-
-## More Resources
-
-[WeibullR.plotly](https://paulgovan.github.io/WeibullR.plotly/) is a
-package for building interactive Weibull models.
-
-[WeibullR.learnr](https://paulgovan.github.io/WeibullR.learnr/) is an
-interactive introduction to life data analysis.

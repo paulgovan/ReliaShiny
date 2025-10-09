@@ -1,8 +1,8 @@
-url: https://paulgovan.github.io/WeibullR.shiny/
+url: https://paulgovan.github.io/ReliaShiny/
 template:
   bootstrap: 5
-app:
-- name: WeibullRshiny
-  title: A Shiny App for Weibull Analysis
-  url: https://govan.shinyapps.io/weibullrshiny/
+tutorials:
+- name: ReliaShiny
+  title: A Shiny App for Reliability Analysis
+  url: https://govan.shinyapps.io/reliashiny/
 

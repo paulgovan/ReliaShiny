@@ -2,9 +2,9 @@ pandoc: 3.1.11
 pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
-  Growth: Growth.html
-  Weibull: Weibull.html
-last_built: 2025-07-22T01:11Z
+  LDA: LDA.html
+  RGA: RGA.html
+last_built: 2025-10-09T23:16Z
 urls:
-  reference: https://paulgovan.github.io/WeibullR.shiny/reference
-  article: https://paulgovan.github.io/WeibullR.shiny/articles
+  reference: https://paulgovan.github.io/ReliaShiny/reference
+  article: https://paulgovan.github.io/ReliaShiny/articles

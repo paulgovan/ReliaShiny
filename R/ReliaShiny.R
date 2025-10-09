@@ -16,5 +16,5 @@
 #'   ReliaShiny()
 #' }
 ReliaShiny <- function() {
-  shiny::runApp(system.file('app', package = 'ReliaShiny'))
+  shiny::runApp(system.file("app", package = "ReliaShiny"))
 }

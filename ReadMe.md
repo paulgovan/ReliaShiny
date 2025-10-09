@@ -5,11 +5,11 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ReliaShiny)](https://CRAN.R-project.org/package=ReliaShiny)
-[![CRAN
-checks](https://badges.cranchecks.info/summary/ReliaShiny.svg)](https://cran.r-project.org/web/checks/check_results_ReliaShiny.html)
+[![R-CMD-check](https://github.com/paulgovan/WeibullR.shiny/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/paulgovan/WeibullR.shiny/actions/workflows/R-CMD-check.yaml)
 [![](http://cranlogs.r-pkg.org/badges/last-month/ReliaShiny)](https://cran.r-project.org/package=ReliaShiny)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/ReliaShiny)](https://cran.r-project.org/package=ReliaShiny)
-[![Lifecycle:experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![](https://img.shields.io/badge/doi-10.32614/CRAN.package.ReliaShiny-green.svg)](https://doi.org/10.32614/CRAN.package.ReliaShiny)
 <!-- badges: end -->
 
@@ -35,7 +35,7 @@ install.packages("ReliaShiny")
 To install the development version:
 
 ``` r
-devtools::install_github('paulgovan/ReliaShiny')
+devtools::install_github("paulgovan/ReliaShiny")
 ```
 
 To launch the app:

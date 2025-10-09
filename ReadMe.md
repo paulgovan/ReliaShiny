@@ -1,5 +1,5 @@
 
-# ReliaShiny
+# ReliaShiny <a href="https://paulgovan.github.io/ReliaShiny/"><img src="man/figures/logo.png" align="right" height="139" alt="ReliaShiny website" /></a>
 
 <!-- badges: start -->
 
@@ -12,10 +12,6 @@ status](https://www.r-pkg.org/badges/version/ReliaShiny)](https://CRAN.R-project
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![](https://img.shields.io/badge/doi-10.32614/CRAN.package.ReliaShiny-green.svg)](https://doi.org/10.32614/CRAN.package.ReliaShiny)
 <!-- badges: end -->
-
-<img
-src="https://github.com/paulgovan/ReliaShiny/blob/master/inst/app/www/WeibullR.png?raw=true"
-style="width:25.0%" />
 
 # Introduction
 

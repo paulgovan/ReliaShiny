@@ -1,6 +1,8 @@
 url: https://paulgovan.github.io/ReliaShiny/
 template:
+  light-switch: true
   bootstrap: 5
+  bootswatch: united
 tutorials:
 - name: ReliaShiny
   title: A Shiny App for Reliability Analysis

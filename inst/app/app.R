@@ -1408,7 +1408,7 @@ server <- function(input, output, session) {
 
       # Run the duane object
         duane_obj <-
-          ReliaGrowR::duane_plot(
+          ReliaGrowR::duane(
             times = growthDat()[[input$times]],
             failures = growthDat()[[input$failures]]
           )

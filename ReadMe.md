@@ -15,14 +15,17 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 
 # Introduction
 
-Welcome to **ReliaShiny!** ReliaShiny is an interactive web application
-for reliability analysis. It is designed to be user-friendly and
-accessible to both beginners and experienced practitioners in the field
-of reliability engineering.
+**Welcome to ReliaShiny!** ReliaShiny is an interactive web application
+for reliability analysis. The app is built using the
+[shiny](https://shiny.rstudio.com/) package in R. ReliaShiny provides an
+easy-to-use interface for performing reliability analysis using the
+[WeibullR](https://cran.r-project.org/package=WeibullR) and
+[ReliaGrowR](https://cran.r-project.org/package=ReliaGrowR) packages in
+R.
 
 # Getting Started
 
-To install ReliaShiny in R:
+To install `ReliaShiny` in R:
 
 ``` r
 install.packages("ReliaShiny")

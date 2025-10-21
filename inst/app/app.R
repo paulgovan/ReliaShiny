@@ -1,7 +1,126 @@
+
+# Helper function for providing default values
 `%then%` <- function(a, b) {
     if (is.null(a)) b else a
 }
 
+# Function to extract RGA summary data
+extract_rga_summ <- function(rga_obj, digits = 4) {
+  # Determine model type
+  model_type <- if (!is.null(rga_obj$breakpoints)) "Piecewise NHPP" else "Crow-AMSAA"
+
+  # Extract and round key stats
+  total_failures <- rga_obj$n_obs
+  growth_rates <- round(as.numeric(rga_obj$growth_rate), digits)
+  betas <- 1 - growth_rates
+  lambdas <- round(as.numeric(rga_obj$lambdas), digits)
+  fit_stats <- round(c(LogLik = rga_obj$logLik, AIC = rga_obj$AIC, BIC = rga_obj$BIC), digits)
+
+  # Helper to create indexed names if needed
+  make_names <- function(base, vals) {
+    if (length(vals) > 1) paste0(base, "[", seq_along(vals), "]") else base
+  }
+
+  # Assemble parameter names and values
+  params <- c(
+    "Model Type",
+    "Total Failures",
+    make_names("Beta", betas),
+    make_names("Growth Rate", growth_rates),
+    make_names("Lambda", lambdas),
+    names(fit_stats)
+  )
+
+  values <- c(
+    list(model_type),
+    list(total_failures),
+    as.list(betas),
+    as.list(growth_rates),
+    as.list(lambdas),
+    as.list(fit_stats)
+  )
+
+  # Return data frame
+  data.frame(Param = params, Value = I(values), stringsAsFactors = FALSE)
+}
+
+# Function to extract WeibullR summary data
+extract_wblr_summ <- function(wblr_obj, digits = 4) {
+
+  # Extract fitting options and fitted values
+  fit_opts <- wblr_obj$fit[[1]]$options
+  fit_vec  <- as.numeric(wblr_obj$fit[[1]]$fit_vec)
+  gof      <- wblr_obj$fit[[1]]$gof
+
+  # Identify model type
+  model_type <- switch(
+    fit_opts$dist,
+    weibull   = "Weibull",
+    weibull3p = "Weibull 3P",
+    lognormal = "Lognormal",
+    "Unknown"
+  )
+
+  # Extract parameter names and values
+  if (fit_opts$dist == "lognormal") {
+    params <- c("Mulog", "Sigmalog")
+    values <- round(fit_vec[1:2], digits)
+  } else if (fit_opts$dist == "weibull") {
+    params <- c("Beta", "Eta")
+    values <- round(c(fit_vec[2], fit_vec[1]), digits)
+  } else if (fit_opts$dist == "weibull3p") {
+    params <- c("Beta", "Eta", "Gamma")
+    values <- round(c(fit_vec[2], fit_vec[1], fit_vec[3]), digits)
+  } else {
+    params <- character()
+    values <- numeric()
+  }
+
+  # Add goodness-of-fit statistic
+  methlab <- methval <- NULL
+  if (!is.null(fit_opts$method.fit)) {
+    if (fit_opts$method.fit == "rr-xony" && !is.null(gof$r2)) {
+      methlab <- "R^2"
+      methval <- round(gof$r2, digits)
+    } else if (fit_opts$method.fit == "mle" && !is.null(gof$loglik)) {
+      methlab <- "Log-likelihood"
+      methval <- round(gof$loglik, digits)
+    }
+  }
+
+  # Totals
+  total_events      <- if (!is.null(wblr_obj$n)) wblr_obj$n else NA
+  total_failures    <- if (!is.null(wblr_obj$fail)) wblr_obj$fail else NA
+  total_intervals   <- if (!is.null(wblr_obj$interval)) wblr_obj$interval else NA
+  total_suspensions <- if (!is.null(wblr_obj$cens)) wblr_obj$cens else NA
+
+  # Build final key/value pairs
+  Param <- c(
+    "Model Type",
+    "Total Events",
+    "Total Failures",
+    "Total Intervals",
+    "Total Suspensions",
+    params,
+    if (!is.null(methlab)) methlab
+  )
+
+  Value <- c(
+    model_type,
+    as.character(c(total_events, total_failures, total_intervals, total_suspensions)),
+    as.character(values),
+    if (!is.null(methval)) as.character(methval)
+  )
+
+  # Return tidy two-column data.frame
+  data.frame(
+    Param = Param,
+    Value = Value,
+    stringsAsFactors = FALSE
+  )
+}
+
+# Define UI for application
 ui <- shinydashboard::dashboardPage(
     skin = "red",
     shinydashboard::dashboardHeader(title = "ReliaShiny"),
@@ -19,9 +138,6 @@ ui <- shinydashboard::dashboardPage(
               shinydashboard::menuSubItem("Model", tabName = "growthModel", icon = icon("chart-line"))
             ),
             shiny::br(),
-            shinydashboard::menuItem("Help", icon = icon("info-circle"), href = "https://paulgovan.github.io/ReliaShiny/"),
-            shinydashboard::menuItem("Source Code", icon = icon("github"), href = "https://github.com/paulgovan/ReliaShiny"),
-            shiny::br(),
             shiny::bookmarkButton()
         )
     ),
@@ -31,45 +147,75 @@ ui <- shinydashboard::dashboardPage(
         # First tab content
         shinydashboard::tabItem(tabName = "landing",
                                 shiny::fluidRow(
+                                  shiny::column(
+                                    width = 8,
                                     shinydashboard::box(
-                                        title = "",
                                         width = 12,
                                         shiny::img(
-                                            src = "WeibullR.png",
-                                            height = 200,
-                                            width = 173
+                                          src = "WeibullR.png",
+                                          height = 200,
+                                          width = 175
                                         ),
-                                        shiny::h2("ReliaShiny"),
-                                        shiny::h3(
-                                            "A ",
-                                            shiny::a(href = 'http://shiny.rstudio.com', 'Shiny'),
-                                            "app for Reliability Analysis"
-                                            ),
-                                        shiny::br(),
+                                        h2("ReliaShiny"),
                                         shiny::h4(
-                                            "For help getting started, view the ",
-                                            shiny::a(href = 'https://paulgovan.github.io/ReliaShiny/', 'Project Site')
+                                            "A Shiny App for Reliability Analysis"
                                             ),
+                                        br(),
                                         shiny::h4(
-                                            "To download an example data set, choose from the following: ",
-                                            tags$ul(
-                                                tags$li(shiny::downloadLink('failure_data', 'Time-to-Failure Data')),
-                                                tags$li(shiny::downloadLink('censored_data', 'Right Censored Data'))
+                                          tags$b("Welcome to ReliaShiny!"),
+                                            "ReliaShiny is an interactive web application for reliability analysis. The app is built using ",
+                                            shiny::a(href = 'https://www.r-project.org/', 'R'),
+                                            " and the ",shiny::a(href = 'https://shiny.rstudio.com/', 'shiny'
+                                            )," package. ReliaShiny provides an easy-to-use interface for performing reliability analysis using the ",shiny::a(href = 'https://cran.r-project.org/web/packages/WeibullR/index.html', 'WeibullR')," and " ,shiny::a(href = 'https://cran.r-project.org/web/packages/ReliaGrowR/index.html', 'ReliaGrowR')," packages."
                                             )
-                                        ),
-                                        shiny::h4(
-                                            "To upload your own data set, click",
-                                            shiny::a("Data", href = "#shiny-tab-data", "data-toggle" = "tab"),
-                                            " in the sidepanel to get started"
-                                        ),
-                                        shiny::br(),
-                                        shiny::h4(
-                                            shiny::HTML('&copy'),
-                                            '2023 By Paul Govan. ',
-                                            shiny::a(href = 'http://www.apache.org/licenses/LICENSE-2.0', 'Terms of Use.')
-                                        ),
                                     )
-                                )),
+                                    # ,
+                                    # shinydashboard::box(
+                                    #     width = 12,
+                                    #     tags$video(src = "ReliaShiny.mov", type = "video/mov", controls = TRUE, width = '100%', height = '100%')
+                                    #
+                                    # )
+                                  ),
+                                  shiny::column(
+                                    width = 4,
+                                    shinydashboard::box(
+                                        title = "Links",
+                                        width = 12,
+                                        shiny::h4(
+                                            "For help getting started, visit the ",
+                                            shiny::a(href = 'https://paulgovan.github.io/ReliaShiny/', 'Project Site'),
+                                            " for documentation and tutorials"
+                                            ),
+                                        shiny::h4(
+                                          "To view the source code, visit the ",
+                                          shiny::a(href = 'https://github.com/paulgovan/ReliaShiny/', 'GitHub Repository')
+                                        ),
+                                        shiny::h4(
+                                            "To report bugs or request features, open a ",
+                                            shiny::a(href = 'https://github.com/paulgovan/ReliaShiny/issues', 'GitHub Issue')
+                                        )
+                                    ),
+                                    shinydashboard::box(
+                                        title = "Development",
+                                        width = 12,
+                                        shiny::h4("Author"),
+                                        shiny::h5(
+                                          tags$a(href = "https://github.com/paulgovan", "Paul Govan")
+                                        ),
+
+                                        shiny::h4("License"),
+                                        shiny::h5(
+                                          tags$a(href = "https://creativecommons.org/licenses/by/4.0", "CC BY 4.0 License")
+                                        ),
+                                        shiny::h4("Citation"),
+                                        shiny::h5(
+                                          tags$a(href = "https://paulgovan.github.io/ReliaGrowR/authors.html#citation", "Citing ReliaGrowR")
+
+                                    )
+                                  )
+                                )
+        )
+        ),
 
         # Weibull data tab content
         shinydashboard::tabItem(tabName = "data",
@@ -321,13 +467,13 @@ ui <- shinydashboard::dashboardPage(
                                     shiny::tabPanel(
                                       "Probability Plot",
                                       shiny::fluidRow(
-                                        shiny::column(width = 12,
+                                        shiny::column(width = 8,
                                                       shinyWidgets::dropdownButton(
                                                         h3("Plot Options"),
                                                         # Probability color
                                                         shiny::selectInput(
                                                           inputId = "probcol",
-                                                          h5("Probability Points Color:"),
+                                                          h5("Probability Points:"),
                                                           c("black",
                                                             "blue",
                                                             "red",
@@ -341,7 +487,7 @@ ui <- shinydashboard::dashboardPage(
                                                         # Fit color
                                                         shiny::selectInput(
                                                           inputId = "fitcol",
-                                                          h5("Fit Color:"),
+                                                          h5("Fit:"),
                                                           c("blue",
                                                             "red",
                                                             "yellow",
@@ -354,7 +500,7 @@ ui <- shinydashboard::dashboardPage(
                                                         # CB color
                                                         shiny::selectInput(
                                                           inputId = "confcol",
-                                                          h5("Confidence Bounds Color:"),
+                                                          h5("Confidence Bounds:"),
                                                           c("blue",
                                                             "red",
                                                             "yellow",
@@ -367,7 +513,7 @@ ui <- shinydashboard::dashboardPage(
                                                         # Grid color
                                                         shiny::selectInput(
                                                           inputId = "gridcol",
-                                                          h5("Grid Color:"),
+                                                          h5("Grid:"),
                                                           c("lightgray",
                                                             "black",
                                                             "blue",
@@ -390,35 +536,30 @@ ui <- shinydashboard::dashboardPage(
                                                         # Ylab
                                                         shiny::textInput(inputId = "ylab",
                                                                          h5("Y-axis Label:"),
-                                                                         value = "Unreliability (%)"),
+                                                                         value = "Failure Probability (%)"),
                                                         # Significant digits
                                                         shiny::numericInput(
                                                           inputId = "signif",
                                                           h5("Significant Digits:"),
                                                           value = 3
                                                         ),
-                                                        # Show CB
-                                                        # shiny::checkboxInput("confBounds",
-                                                        #                      label = "Show confidence bounds?",
-                                                        #                      value = TRUE),
                                                         # Show suspensions plot
                                                         shiny::checkboxInput("suspPlot",
-                                                                             label = "Show suspensions plot?",
-                                                                             value = TRUE),
-                                                        # Show results table
-                                                        shiny::checkboxInput("resTab",
-                                                                             label = "Show results table?",
+                                                                             label = "Show suspensions",
                                                                              value = TRUE),
                                                         # Show grid
                                                         shiny::checkboxInput("grid",
-                                                                             label = "Show grid?",
+                                                                             label = "Show grid",
                                                                              value = TRUE),
                                                       circle = TRUE,
                                                       status = "danger",
                                                       icon = icon("gear")
                                         ),
                                         plotly::plotlyOutput('probPlot')
-                                        )
+                                        ),
+                                        shiny::column(width = 3,
+                                                      shiny::tableOutput("wblr_results")
+                                      )
                                       )
                                     ),
                                     shiny::tabPanel("Contour Plot",
@@ -457,7 +598,7 @@ ui <- shinydashboard::dashboardPage(
                                                                       ),
                                                                       # Show grid
                                                                       shiny::checkboxInput("grid2",
-                                                                                           label = "Show grid?",
+                                                                                           label = "Show grid",
                                                                                            value = TRUE),
                                                                       # Main title
                                                                       shiny::textInput(inputId = "main2",
@@ -632,13 +773,13 @@ ui <- shinydashboard::dashboardPage(
                                     shiny::tabPanel(
                                       "Reliability Growth Plot",
                                       shiny::fluidRow(
-                                        shiny::column(width = 12,
+                                        shiny::column(width = 8,
                                                       shinyWidgets::dropdownButton(
                                                         h3("Plot Options"),
                                                         # Points color
                                                         shiny::selectInput(
                                                           inputId = "pointCol",
-                                                          h5("Points Color:"),
+                                                          h5("Failure Points:"),
                                                           c("black",
                                                             "blue",
                                                             "red",
@@ -652,7 +793,7 @@ ui <- shinydashboard::dashboardPage(
                                                         # Fit color
                                                         shiny::selectInput(
                                                           inputId = "modelCol",
-                                                          h5("Model Color:"),
+                                                          h5("Fit:"),
                                                           c("blue",
                                                             "red",
                                                             "yellow",
@@ -665,7 +806,7 @@ ui <- shinydashboard::dashboardPage(
                                                         # CB color
                                                         shiny::selectInput(
                                                           inputId = "growthConfCol",
-                                                          h5("Confidence Bounds Color:"),
+                                                          h5("Confidence Bounds:"),
                                                           c("blue",
                                                             "red",
                                                             "yellow",
@@ -678,7 +819,7 @@ ui <- shinydashboard::dashboardPage(
                                                         # Grid color
                                                         shiny::selectInput(
                                                           inputId = "growthGridCol",
-                                                          h5("Grid Color:"),
+                                                          h5("Grid:"),
                                                           c("lightgray",
                                                             "black",
                                                             "blue",
@@ -693,7 +834,7 @@ ui <- shinydashboard::dashboardPage(
                                                         # Breakpoint color
                                                         shiny::selectInput(
                                                           inputId = "breakCol",
-                                                          h5("Breakpoint Color:"),
+                                                          h5("Breakpoints:"),
                                                           c("blue",
                                                             "red",
                                                             "yellow",
@@ -719,24 +860,10 @@ ui <- shinydashboard::dashboardPage(
                                                         status = "danger",
                                                         icon = icon("gear")
                                                       ),
-                                                      plotly::plotlyOutput('growthPlot'),
-                                                      br(),
-                                                      # Beta value(s)
-                                                      shiny::fluidRow(
-                                                        shinydashboard::box(
-                                                          title = "Beta Value(s)",
-                                                          solidHeader = TRUE,
-                                                          shiny::verbatimTextOutput("betaValues")
-                                                        )
-                                                      ),
-                                                      # # Lambda value(s)
-                                                      # shiny::fluidRow(
-                                                      #   shinydashboard::box(
-                                                      #     title = "Lambda Value(s)",
-                                                      #     solidHeader = TRUE,
-                                                      #     shiny::verbatimTextOutput("lambdaValues")
-                                                      #   )
-                                                      # )
+                                                      plotly::plotlyOutput('growthPlot')
+                                        ),
+                                        shiny::column(width = 3,
+                                                      shiny::tableOutput("rga_results")
                                         )
                                       )
                                     ),
@@ -748,7 +875,7 @@ ui <- shinydashboard::dashboardPage(
                                                                       # Plot color
                                                                       shiny::selectInput(
                                                                         inputId = "pointCol2",
-                                                                        h5("Points Color:"),
+                                                                        h5("MTBF Points:"),
                                                                         c("black",
                                                                           "blue",
                                                                           "red",
@@ -762,9 +889,22 @@ ui <- shinydashboard::dashboardPage(
                                                                       # Line color
                                                                       shiny::selectInput(
                                                                         inputId = "modelCol2",
-                                                                        h5("Model Color:"),
+                                                                        h5("Fit:"),
                                                                         c("black",
                                                                           "blue",
+                                                                          "red",
+                                                                          "yellow",
+                                                                          "green",
+                                                                          "orange",
+                                                                          "violet"
+                                                                        ),
+                                                                        selected = "blue"
+                                                                      ),
+                                                                      # CB color
+                                                                      shiny::selectInput(
+                                                                        inputId = "growthConfCol2",
+                                                                        h5("Confidence Bounds:"),
+                                                                        c("blue",
                                                                           "red",
                                                                           "yellow",
                                                                           "green",
@@ -776,7 +916,7 @@ ui <- shinydashboard::dashboardPage(
                                                                       # Grid color
                                                                       shiny::selectInput(
                                                                         inputId = "growthGridCol2",
-                                                                        h5("Grid Color:"),
+                                                                        h5("Grid:"),
                                                                         c("lightgray",
                                                                           "black",
                                                                           "blue",
@@ -864,7 +1004,7 @@ server <- function(input, output, session) {
 
       # Get the number of failures in the data set
       if (is.null(dat())) {
-        events <- NULL
+        events <- 0
       } else
         events <- nrow(dat())
 
@@ -880,7 +1020,7 @@ server <- function(input, output, session) {
 
       # Get the number of failures in the data set
       if (is.null(dat())) {
-        failures <- NULL
+        failures <- 0
       } else if (is.null(input$event) || input$suspensions == 0) {
         failures <- nrow(dat())
       } else if (input$suspensions == 1) {
@@ -902,7 +1042,7 @@ server <- function(input, output, session) {
 
       # Get the number of suspensions in the data set
       if (is.null(dat())) {
-        suspensions <- NULL
+        suspensions <- 0
       } else if (is.null(input$event) || input$suspensions == 0) {
           suspensions <- 0
       } else if (input$suspensions == 1) {
@@ -1085,9 +1225,8 @@ server <- function(input, output, session) {
                         interval = ints_dat(),
                         pp = input$pp
                     ),
-                    method.fit = input$dist,
+                    method.fit = "weibayes",
                     weibayes.beta = input$beta
-
                 )
         }
 
@@ -1110,6 +1249,24 @@ server <- function(input, output, session) {
         }
     })
 
+    # Extract results from the wblr object
+    wblr_res <- shiny::reactive({
+        if (is.null(wblr_obj()))
+            return(NULL)
+
+        wblr_res <- extract_wblr_summ(wblr_obj())
+    })
+
+    # Build a table of the wblr results
+    output$wblr_results = shiny::renderTable({
+        if (is.null(wblr_res()))
+            return(NULL)
+        shiny::validate(
+            shiny::need(!is.null(wblr_res()), message = FALSE)
+            )
+        wblr_res()
+        }, striped = TRUE, hover = TRUE, bordered = TRUE, align = 'c')
+
     # Create a suspensions vector
     susp_vec <- shiny::reactive({
         if (is.null(input$event) || input$suspensions == 0) {
@@ -1129,7 +1286,8 @@ server <- function(input, output, session) {
             wblr_obj(),
             susp = susp_vec(),
             showSusp = input$suspPlot,
-            showRes = input$resTab,
+            # To do: remove results table
+            showRes = FALSE,
             main = input$main,
             xlab = input$xlab,
             ylab = input$ylab,
@@ -1215,7 +1373,7 @@ server <- function(input, output, session) {
 
       # Get the number of failures in the data set
       if (is.null(growthDat())) {
-        maxFailures <- NULL
+        maxFailures <- 0
       } else {
         req(input$failures)
         maxFailures <- sum(growthDat()[[input$failures]])
@@ -1233,7 +1391,7 @@ server <- function(input, output, session) {
 
       # Get the max time in the data set
       if (is.null(growthDat())) {
-        maxTime <- NULL
+        maxTime <- 0
       } else {
         req(input$times)
         maxTime <- tail(growthDat()[[input$times]], 1)
@@ -1279,11 +1437,15 @@ server <- function(input, output, session) {
       # Error handling
       shiny::validate(
         shiny::need(
+          try(input$times != input$failures),
+          "Time and Failure columns must be different."
+        ) %then%
+        shiny::need(
           try(is.numeric(growthDat()[[input$times]])),
           "Time column must be numeric."
         ) %then%
           shiny::need(
-            try(all(growthDat()[[input$times]])),
+            try(all(growthDat()[[input$times]]>0)),
             "Time column must contain positive numbers."
           ) %then%
           shiny::need(
@@ -1310,11 +1472,11 @@ server <- function(input, output, session) {
         shiny::validate(
             shiny::need(
               try(input$breakpoints > min(growthDat()[[input$times]])),
-              "Breakpoint must be greater than the minimum failure time."
+              "Breakpoint must be greater than the smallest failure time."
             ) %then%
             shiny::need(
               try(input$breakpoints < max(growthDat()[[input$times]])),
-              "Breakpoint must be less than the maximum failure time."
+              "Breakpoint must be less than the largest failure time."
             )
         )
 
@@ -1339,29 +1501,26 @@ server <- function(input, output, session) {
       }
     })
 
-    # Get the selected node measure from the user and print the results
-    output$betaValues <- shiny::renderPrint({
+    # Extract results from the rga object
+    rga_res <- shiny::reactive({
       if (is.null(rga_obj()))
         return(NULL)
-      else {
-        if (input$growthModel == 1) {
-          print(rga_obj()$betas)
-        } else
-          print(rga_obj()$betas$log_times)
-      }
+
+      rga_res <- extract_rga_summ(rga_obj())
+
     })
 
-    # # Get the selected node measure from the user and print the results
-    # output$lambdaValues <- shiny::renderPrint({
-    #   if (is.null(rga_obj()))
-    #     return(NULL)
-    #   else {
-    #     if (input$growthModel == 1) {
-    #       print(rga_obj()$lambdas)
-    #     } else
-    #       print(rga_obj()$lambdas$log_times)
-    #   }
-    # })
+    # Build a table of the rga results
+    output$rga_results = shiny::renderTable({
+      if (is.null(rga_res()))
+        return(NULL)
+
+      shiny::validate(
+        shiny::need(!is.null(rga_res()), message = FALSE)
+      )
+
+      rga_res()
+    }, striped = TRUE, hover = TRUE, bordered = TRUE, align = 'c')
 
     # Build the reliability growth plot
     output$growthPlot <- plotly::renderPlotly({
@@ -1389,6 +1548,10 @@ server <- function(input, output, session) {
       # Error handling
       shiny::validate(
         shiny::need(
+          try(input$times != input$failures),
+          "Time and Failure columns must be different."
+        ) %then%
+        shiny::need(
           try(is.numeric(growthDat()[[input$times]])),
           "Time column must be numeric"
         ) %then%
@@ -1410,7 +1573,9 @@ server <- function(input, output, session) {
         duane_obj <-
           ReliaGrowR::duane(
             times = growthDat()[[input$times]],
-            failures = growthDat()[[input$failures]]
+            failures = growthDat()[[input$failures]],
+            # To do: add confidence intervals
+            # conf.level = input$growthConf
           )
     })
 
@@ -1423,6 +1588,8 @@ server <- function(input, output, session) {
         duane_obj(),
         pointCol = input$pointCol2,
         fitCol = input$modelCol2,
+        # To do: add confidence intervals
+        # confCol = input$growthConfCol2,
         gridCol = input$growthGridCol2,
         main = input$duaneMain,
         xlab = input$duaneXlab,

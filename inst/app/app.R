@@ -152,7 +152,7 @@ ui <- shinydashboard::dashboardPage(
                                     shinydashboard::box(
                                         width = 12,
                                         shiny::img(
-                                          src = "WeibullR.png",
+                                          src = "hexSticker.png",
                                           height = 200,
                                           width = 175
                                         ),

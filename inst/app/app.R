@@ -954,6 +954,7 @@ ui <- shinydashboard::dashboardPage(
     )
 )
 
+# Server logic
 server <- function(input, output, session) {
 
     session$onSessionEnded(stopApp)
@@ -1456,13 +1457,20 @@ server <- function(input, output, session) {
           )
       )
 
+      # Get the confidence level
+      if (input$growthConf == 0) {
+        conf_level <- 0.001
+      } else {
+        conf_level <- input$growthConf
+      }
+
       # Run the rga object
       if (input$growthModel == 1) {
         rga_obj <-
           ReliaGrowR::rga(
             times = growthDat()[[input$times]],
             failures = growthDat()[[input$failures]],
-            conf_level = input$growthConf
+            conf_level = conf_level
           )
       } else if (input$growthModel == 2) {
 
@@ -1477,12 +1485,6 @@ server <- function(input, output, session) {
               "Breakpoint must be less than the largest failure time."
             )
         )
-
-        if (input$growthConf == 0) {
-          conf_level <- 0.001
-        } else {
-          conf_level <- input$growthConf
-        }
 
         # Transform user-supplied breakpoints into a numeric vector
         breakpoints <- as.numeric(unlist(input$breakpoints,","))
@@ -1573,6 +1575,7 @@ server <- function(input, output, session) {
           )
       )
 
+      # Get the confidence level
       if (input$growthConf == 0) {
         conf_level <- 0.001
       } else {
@@ -1606,4 +1609,5 @@ server <- function(input, output, session) {
     })
 }
 
+# Run the application
 shiny::shinyApp(ui, server, enableBookmarking = "url")

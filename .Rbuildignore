@@ -19,3 +19,4 @@ _\.new\.png$
 ^vignettes$
 ^inst/images$
 ^LICENSE\.md$
+^codemeta\.json$

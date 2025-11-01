@@ -1,3 +1,10 @@
+# ReliaShiny v0.4 (formerly WeibullR.shiny)
+
+* `WeibullR.shiny` was renamed to `ReliaShiny` to better reflect its purpose as a reliability analysis tool.
+* Updated documentation and tutorials to reflect the new name.
+* Updated dependency on `ReliaPlotR` package. 
+* Minor bug fixes and performance improvements.
+
 # WeibullR.shiny v0.3.1
 
 ## Minor improvements and bug fixes

@@ -1,7 +1,7 @@
 Package: ReliaShiny
 Type: Package
 Title: A 'Shiny' App for Reliability Analysis
-Version: 0.3.1
+Version: 0.4
 Authors@R: person("Paul", "Govan", email = "paul.govan2@gmail.com", role = c("aut", "cre", "cph"), comment = c(ORCID = "0000-0002-1821-8492"))
 Description: A 'Shiny' web application for life data analysis.
 License: CC BY 4.0
@@ -15,7 +15,7 @@ Imports:
     shinyWidgets
 Encoding: UTF-8
 RoxygenNote: 7.3.3
-URL: https://paulgovan.github.io/ReliaShiny/, https://github.com/paulgovan/ReliaShiny, https://govan.shinyapps.io/weibullrshiny/
+URL: https://paulgovan.github.io/ReliaShiny/, https://github.com/paulgovan/ReliaShiny
 BugReports: https://github.com/paulgovan/ReliaShiny/issues
 Suggests: 
     knitr,

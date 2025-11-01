@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   LDA: LDA.html
   RGA: RGA.html
-last_built: 2025-11-01T16:51Z
+last_built: 2025-11-01T19:43Z
 urls:
   reference: https://paulgovan.github.io/ReliaShiny/reference
   article: https://paulgovan.github.io/ReliaShiny/articles

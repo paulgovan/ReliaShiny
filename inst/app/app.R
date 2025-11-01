@@ -1282,12 +1282,10 @@ server <- function(input, output, session) {
         if (is.null(wblr_obj()))
             return(NULL)
 
-        WeibullR.plotly::plotly_wblr(
+        ReliaPlotR::plotly_wblr(
             wblr_obj(),
             susp = susp_vec(),
             showSusp = input$suspPlot,
-            # To do: remove results table
-            showRes = FALSE,
             main = input$main,
             xlab = input$xlab,
             ylab = input$ylab,
@@ -1315,7 +1313,7 @@ server <- function(input, output, session) {
                     "Contour plots are only available for the 'LRB' confidence method..."
                 )
         )
-        WeibullR.plotly::plotly_contour(
+        ReliaPlotR::plotly_contour(
             wblr_obj(),
             main = input$main2,
             xlab = input$xlab2,
@@ -1480,6 +1478,12 @@ server <- function(input, output, session) {
             )
         )
 
+        if (input$growthConf == 0) {
+          conf_level <- 0.001
+        } else {
+          conf_level <- input$growthConf
+        }
+
         # Transform user-supplied breakpoints into a numeric vector
         breakpoints <- as.numeric(unlist(input$breakpoints,","))
         rga_obj <-
@@ -1488,7 +1492,7 @@ server <- function(input, output, session) {
             failures = growthDat()[[input$failures]],
             model_type = "Piecewise NHPP",
             breaks = breakpoints,
-            conf_level = input$growthConf
+            conf_level = conf_level
           )
       } else if (input$growthModel == 3) {
         rga_obj <-
@@ -1496,7 +1500,7 @@ server <- function(input, output, session) {
             times = growthDat()[[input$times]],
             failures = growthDat()[[input$failures]],
             model_type = "Piecewise NHPP",
-            conf_level = input$growthConf
+            conf_level = conf_level
           )
       }
     })
@@ -1527,7 +1531,7 @@ server <- function(input, output, session) {
       if (is.null(rga_obj()))
         return(NULL)
 
-      WeibullR.plotly::plotly_rga(
+      ReliaPlotR::plotly_rga(
         rga_obj(),
         main = input$growthMain,
         xlab = input$growthXlab,
@@ -1569,13 +1573,18 @@ server <- function(input, output, session) {
           )
       )
 
+      if (input$growthConf == 0) {
+        conf_level <- 0.001
+      } else {
+        conf_level <- input$growthConf
+      }
+
       # Run the duane object
         duane_obj <-
           ReliaGrowR::duane(
             times = growthDat()[[input$times]],
             failures = growthDat()[[input$failures]],
-            # To do: add confidence intervals
-            # conf.level = input$growthConf
+            conf.level = conf_level
           )
     })
 
@@ -1584,12 +1593,11 @@ server <- function(input, output, session) {
       if (is.null(duane_obj()))
         return(NULL)
 
-      WeibullR.plotly::plotly_duane(
+      ReliaPlotR::plotly_duane(
         duane_obj(),
         pointCol = input$pointCol2,
         fitCol = input$modelCol2,
-        # To do: add confidence intervals
-        # confCol = input$growthConfCol2,
+        confCol = input$growthConfCol2,
         gridCol = input$growthGridCol2,
         main = input$duaneMain,
         xlab = input$duaneXlab,

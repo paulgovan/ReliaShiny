@@ -3,11 +3,11 @@
 #' This function launches a Shiny application for reliability analysis.
 #'
 #' @import ReliaGrowR
+#' @import ReliaPlotR
 #' @import shiny
 #' @import shinydashboard
 #' @import shinyWidgets
 #' @import WeibullR
-#' @import WeibullR.plotly
 #' @export
 #' @seealso \url{https://paulgovan.github.io/ReliaShiny/}
 #' @return This function does not return a value.

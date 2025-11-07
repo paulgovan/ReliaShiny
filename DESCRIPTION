@@ -8,8 +8,8 @@ License: CC BY 4.0
 Imports:
     magrittr,
     ReliaGrowR,
+    ReliaPlotR,
     WeibullR,
-    WeibullR.plotly,
     shiny,
     shinydashboard,
     shinyWidgets

@@ -6,6 +6,8 @@
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ReliaShiny)](https://CRAN.R-project.org/package=ReliaShiny)
 [![R-CMD-check](https://github.com/paulgovan/ReliaShiny/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/paulgovan/ReliaShiny/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/paulgovan/ReliaShiny/graph/badge.svg)](https://app.codecov.io/gh/paulgovan/ReliaShiny)
 [![](http://cranlogs.r-pkg.org/badges/last-month/ReliaShiny)](https://cran.r-project.org/package=ReliaShiny)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/ReliaShiny)](https://cran.r-project.org/package=ReliaShiny)
 [![Lifecycle:

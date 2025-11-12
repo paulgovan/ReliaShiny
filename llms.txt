@@ -1,0 +1,56 @@
+# ReliaShiny
+
+# Introduction
+
+Welcome to **ReliaShiny!** ReliaShiny is an interactive web application
+for reliability analysis. It is designed to be user-friendly and
+accessible to both beginners and experienced practitioners in the field
+of reliability engineering.
+
+# Getting Started
+
+To install ReliaShiny in R:
+
+``` r
+install.packages("ReliaShiny")
+```
+
+To install the development version:
+
+``` r
+devtools::install_github("paulgovan/ReliaShiny")
+```
+
+To launch the app:
+
+``` r
+ReliaShiny::ReliaShiny()
+```
+
+![](https://github.com/paulgovan/ReliaShiny/blob/master/inst/images/Landing.png?raw=true)
+
+Or to access the app through a browser, visit
+[govan.shinyapps.io/reliashiny/](https://govan.shinyapps.io/reliashiny/).
+
+## Code of Conduct
+
+Please note that the ReliaShiny project is released with a [Contributor
+Code of
+Conduct](https://paulgovan.github.io/ReliaShiny/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
+
+# Package index
+
+## All functions
+
+- [`ReliaShiny()`](https://paulgovan.github.io/ReliaShiny/reference/ReliaShiny.md)
+  : A Shiny Reliability Analysis App.
+
+# Articles
+
+### All vignettes
+
+- [Life Data
+  Analysis](https://paulgovan.github.io/ReliaShiny/articles/LDA.md):
+- [Reliability Growth
+  Analysis](https://paulgovan.github.io/ReliaShiny/articles/RGA.md):

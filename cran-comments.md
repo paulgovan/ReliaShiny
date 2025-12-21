@@ -2,6 +2,12 @@
 
 0 errors | 0 warnings | 1 note
 
-* New submission
-
-`WeibullR.shiny` was renamed to `ReliaShiny` to better reflect its purpose as a reliability analysis tool.
+New submission
+  
+  Package was archived on CRAN
+  
+  CRAN repository db overrides:
+    X-CRAN-Comment: Archived on 2025-11-21 as requires archived package
+      'ReliaGrowR'.
+      
+* Dependent package 'ReliaGrowR' is back on CRAN.

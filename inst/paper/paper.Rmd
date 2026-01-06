@@ -1,7 +1,7 @@
 ---
 title: 'ReliaShiny: A FAIR Application for Reliability Analysis'
 output:
-  pdf_document: default/
+  html_document
 ---
 
 ```{r setup, include=FALSE}
@@ -36,10 +36,10 @@ FAIR principles of Findability, Accessibility, Interoperability, and Reusability
 have also been shown to improve the quality and impact of analysis software [3].
 
 Despite these advances, reliability engineering is still not widely supported. Many 
-reliability tools are proprietary, which limits access for a broader audience. The 
-open-source options that do exist are tied to specific programming languages. While 
+reliability tools are proprietary, which both limits access for a broader audience 
+The open-source options that do exist are tied to specific programming languages. While 
 popular packages are available in R [4] and Python [5], they require programming 
-skills that may be a barrier for some users.
+skills that may be a barrier for some users. 
 
 This article introduces ReliaShiny, a web-based application that makes reliability 
 analysis easier to use. Built on the Shiny framework [6], ReliaShiny offers an interactive 
@@ -55,21 +55,21 @@ of future work and possible improvements.
 
 This project started as a proof of concept for performing Life Data Analysis (LDA) in 
 a web application. The initial goal was to build an easy-to-use interface for popular 
-reliability software packages, making these tools more accessible to a wider audience. 
+reliability OSS, making these tools more accessible to a wider audience. 
 Although still under active development, the application has reached a stable stage 
 and is now available for public use. Over time, new features, such as support for 
 Reliability Growth Analysis (RGA), have been added based on user feedback. Moving 
 forward, development will focus on adding more functions to support a broader range 
 of reliability analyses.
 
-The development process was guided by the FAIR principles for research software. 
-These principles shaped important decisions throughout the project, from selecting 
-the core features to designing the user interface. By following FAIR, the goal was 
-to build software that is not only useful but also easy to find, access, integrate, 
-and reuse. This approach helps ensure that the application can effectively meet the 
-needs of its user community.
+To follow best practices in OSS development, the project adopted the FAIR principles 
+for research software as a guiding framework. The FAIR principles shaped important 
+decisions throughout the project, from selecting the core features to designing the 
+user interface. By following FAIR, the goal was to build software that is not only 
+useful but also easy to find, access, integrate, and reuse. This approach helps ensure 
+that the application can effectively meet the needs of its user community.
 
-The following sections describe how the FAIR principles were applied during development.
+The project documentation explains each FAIR principle and how it was applied. The sections below summarize the main ways the FAIR principles were implemented in the project.
 
 * **Findable**: The ReliaShiny software and metadata are available in public repositories, 
   including GitHub (https://github.com) and the Comprehensive R Archive Network (CRAN)           (https://cran.r-project.org). These repositories provide documentation, installation 
@@ -110,8 +110,9 @@ to help users understand fundamental reliability concepts and methods.
 ## Design
 
 ReliaShiny is built with the Shiny framework, which is used to create web applications 
-in R. Shiny apps are reactive, meaning their outputs update automatically whenever 
-inputs change. This reactivity allows for highly interactive workflows, making it 
+in R. Shiny applications use reactive programming to build interactive user interfaces.
+Reactive expressions help control how outputs respond to changes in inputs, which 
+prevents unnecessary recalculations that can slow down performance. This reactivity allows for highly interactive workflows, making it 
 easy to explore and visualize data quickly. Users can try different inputs and instantly 
 see the results without having to refresh or rerun any code. 
 
@@ -123,8 +124,8 @@ Shiny offers several layout templates and also allows building interfaces with c
 HTML. ReliaShiny uses the shinydashboard [9] package, a Shiny extension made for 
 dashboard-style applications. The user interface is organized into multiple menus 
 for key tasks like data input, model fitting, and visualization. The app also uses 
-the shinyWidgets [10] package to provide better input controls and make the app easier 
-to use.
+the shinyWidgets [10] package to provide better control over visualizations, allowing 
+for custom layouts and styles.
 
 On the server side, ReliaShiny is built on key R packages for reliability analysis 
 and visualization. The WeibullR [11] package provides tools to fit and analyze Weibull 
@@ -132,6 +133,16 @@ distributions, which are widely used in life data analysis. The ReliaGrowR [12],
 package helps with reliability growth modeling, allowing users to track and improve 
 system reliability over time. The ReliaPlotR [14] package lets users create interactive 
 reliability plots, making it easier to understand results through dynamic visualizations.
+
+The application follows a modular design, with separate components for different tasks.
+This modularity makes it easier to maintain and expand the application. Each module
+handles a specific function, such as data input or model fitting, and can be updated
+independently. This design also allows for easy addition of new features in the future,
+as new modules can be created and integrated without affecting existing functionality.
+
+The application also follows best practices for error handling and user feedback. Input validation checks
+are implemented to ensure that users provide data in the correct format. If errors
+occur during analysis, informative messages guide users on how to fix the issues. Help text is provided throughout the interface to assist users in understanding various options and features.
 
 ## Usage
 
@@ -143,7 +154,7 @@ the software package from CRAN or GitHub, and then launching the application usi
 a simple command. This option is ideal for users who require offline access or wish 
 to customize the application for their specific needs. 
 
-### Web-based Example
+### Life Data Analysis
 
 To illustrate the functionality of the web-based application, the following example 
 provides an overview of performing LDA using a sample dataset. 
@@ -175,17 +186,19 @@ application also includes several example datasets that can be loaded directly, 
 this example use the sample "Time-to-Failure" dataset.
 
 At this stage, the application should resemble the figure below. This figure shows 
-the data upload and arrangement options, along with a preview of the dataset. The 
-menu has several options for customizing the data arrangement, such as specifying 
-censoring types and grouping variables, but this example uses the default settings.
+the data upload and arrangement options, along with a preview of the dataset. For
+this example, the data is already arranged in the required format, so no further adjustments
+are needed. The Data sub-menu has several options for customizing the data arrangement, 
+such as specifying right-censored and interval-censored data types and grouping variables, 
+but this example uses the default settings. On the right side of the tab are value
+boxes that summarize key information about the dataset, including the number of
+observations, number of failures, and number of censored obervations.
 
 ![](https://github.com/paulgovan/ReliaShiny/blob/master/inst/images/Data.png?raw=true){width=100%}
 
 Next, navigate to the Model sub-menu to fit a reliability model to the data. The Model
-tab provides options for selecting the distribution type, estimation method, and
-other model settings. For this example, the Weibull distribution is selected with
-the Maximum Likelihood Estimation (MLE) method. Feel free to experiment with different 
-configurations to tailor the model to specific needs. The figure below shows the 
+tab provides options for selecting the distribution type, estimation method, plotting
+method, confidence method, and confidence level. For this example, the Weibull distribution is selected with the default options. Feel free to experiment with different configurations to tailor the model to specific needs. The figure below shows the 
 Model tab with the selected settings.
 
 ![](https://github.com/paulgovan/ReliaShiny/blob/master/inst/images/ProbPlot.png?raw=true){width=100%}
@@ -203,59 +216,38 @@ This plot is also interactive, allowing users to zoom in and hover over points.
 
 ![](https://github.com/paulgovan/ReliaShiny/blob/master/inst/images/ContPlot.png?raw=true){width=100%}
 
-### Programmatic Example
+### Reliability Growth Analysis
 
-For users who prefer programmatic access, ReliaShiny comes prepackaged with the 
-ReliaPlotR package. This package provides functions for generating interactive reliability 
-plots similar to those found in the web application. This option is ideal for users 
-who wish to integrate reliability plotting into their existing workflows or who prefer 
-coding over using a graphical interface.
+To demonstrate RGA functionality, the following example provides an overview of performing
+RGA using a sample dataset. First, navigate to the Reliability Growth menu and click on the Data sub-menu.
+Similar to the LDA example, the Data tab provides options for uploading and arranging data for analysis. The application includes several example datasets that can be loaded directly, and this example uses the preloaded "Simple Data" dataset. The right side of the tab displays value boxes that summarize key information about the dataset, including the number of failures and cumulative time.
+Next, under the Data Selection box, select "failures" as the Failure Column. At this stage, the app should resemble the following figure.
 
-To illustrate programmatic analysis, the following example demonstrates basic 
-RGA using the ReliaPlotR package. 
+![](https://github.com/paulgovan/ReliaShiny/blob/master/inst/images/Data2.png?raw=true){width=100%}
 
-First, start by loading `ReliaGrowR` and `ReliaPlotR` in the R environment.
-```{r warning=FALSE}
-library(ReliaGrowR)
-library(ReliaPlotR)
-```
+Next, navigate to the Model sub-menu to build the Reliability Growth model. The application will generate a Reliability Growth Plot using default settings. The model settings include options for selecting the model type and confidence level. The figure below shows the Model tab with the model settings, model plot, and model summary. Feel free to experiment with different configurations to tailor the model to your needs. Next to the plot are additional settings for further customization.
 
-Next set up some example cumulative time and failure data. This data represents
-the times at which failures occurred during testing and the corresponding number 
-of failures at each time point.
-```{r}
-times <- c(100, 200, 300, 400, 500)
-failures <- c(1, 2, 1, 3, 2)
-```
+![](https://github.com/paulgovan/ReliaShiny/blob/master/inst/images/GrowthPlot.png?raw=true){width=100%}
 
-Then run the RGA using the rga function from the ReliaGrowR package. This function 
-fits a reliability growth model to the provided data and returns the results. 
+Finally, visit the Duane Plot tab to create a Duane plot. Similar to the previous plot, the Duane plot visualizes the reliability growth over time. The figure below shows the Duane plot and model summary generated by the application. As with the previous plot, various customization options are also available.
 
-Finally, use the plotly_rga function from the ReliaPlotR package to create an
-interactive plot of the RGA results. This plot allows users to visualize the reliability 
-growth over time and explore the data interactively.
-```{r}
-result <- rga(times, failures)
-plotly_rga(result)
-```
+![](https://github.com/paulgovan/ReliaShiny/blob/master/inst/images/DuanePlot.png?raw=true){width=100%}
 
-The figure above shows the resulting interactive plot generated by the previous code.
-Similar to the plots in the web application, this plot is interactive in a web 
-environment, allowing users to zoom in and hover over points to view additional 
-information about the analysis.
+## Quality Control
 
-ReliaPlotR also includes functions for generating other types of reliability plots. 
-For example, to see how the Mean Time Between Failures (MTBF) changes over time, 
-try the following code:
-```{r}
-plotly_duane(result)
-```
+## Reuse and Sharing
 
-The previous figure shows the interactive plot generated by the previous code. Similar
-to the other examples, this plot is customizable, allowing users to adjust the appearance
-and layout as needed.
+## Summary and Future Work
 
-## Future Work
+This article introduced ReliaShiny, a web-based application for reliability analysis
+that adheres to the FAIR principles. By providing an easy-to-use interface for LDA
+and RGA, the application aims to make reliability analysis more accessible to a
+broader audience. The development process was guided by the FAIR principles, ensuring
+that the software is findable, accessible, interoperable, and reusable. The application
+is available both as a web-hosted version and as a local application, catering to
+different user preferences. Future work will focus on expanding the application’s
+functionality and incorporating user feedback to better meet the needs of the reliability
+community.
 
 While the project is now in a stable state, there are still several opportunities 
 for future development and improvement. Beyond expanding existing features, such 
@@ -277,17 +269,7 @@ of the user community, with possible improvements such as new modeling options,
 better visualization tools, and more documentation and examples. Ongoing development 
 may also be influenced by emerging trends and advances in the field.
 
-## Conclusion
-
-This article introduced ReliaShiny, a web-based application for reliability analysis
-that adheres to the FAIR principles. By providing an easy-to-use interface for LDA
-and RGA, the application aims to make reliability analysis more accessible to a
-broader audience. The development process was guided by the FAIR principles, ensuring
-that the software is findable, accessible, interoperable, and reusable. The application
-is available both as a web-hosted version and as a local application, catering to
-different user preferences. Future work will focus on expanding the application’s
-functionality and incorporating user feedback to better meet the needs of the reliability
-community.
+Include more details and discussion.
 
 ## References
 

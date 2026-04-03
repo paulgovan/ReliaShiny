@@ -1,6 +1,19 @@
 citHeader("To cite ReliaShiny in publications use:")
 
 bibentry(
+  bibtype = "Article",
+  title = "ReliaShiny: A Shiny Application for Reliability Analysis",
+  author = "Paul Govan",
+  year = "2026",
+  journal = "IEEE Reliability Magazine",
+  volume = "",
+  number = "",
+  pages = "1-9",
+  doi = "10.1109/MRL.2026.3669057",
+  url = "https://doi.org/10.1109/MRL.2026.3669057"
+)
+
+bibentry(
   key      = "wbllrshny",
   bibtype  = "Manual",
   title    = "ReliaShiny: A Shiny App Reliability Analysis",

@@ -120,6 +120,11 @@ extract_wblr_summ <- function(wblr_obj, digits = 4) {
   )
 }
 
+# Color palette constants for selectInput choices
+COLORS_FULL <- c("black", "blue", "red", "yellow", "green", "orange", "violet")
+COLORS_LINE <- c("blue", "red", "yellow", "green", "orange", "violet")
+COLORS_GRID <- c("lightgray", "black", "blue", "red", "yellow", "green", "orange", "violet")
+
 # Define UI for application
 ui <- shinydashboard::dashboardPage(
     skin = "red",
@@ -169,12 +174,6 @@ ui <- shinydashboard::dashboardPage(
                                             )," package. ReliaShiny provides an easy-to-use interface for performing reliability analysis using the ",shiny::a(href = 'https://cran.r-project.org/web/packages/WeibullR/index.html', 'WeibullR')," and " ,shiny::a(href = 'https://cran.r-project.org/web/packages/ReliaGrowR/index.html', 'ReliaGrowR')," packages."
                                             )
                                     )
-                                    # ,
-                                    # shinydashboard::box(
-                                    #     width = 12,
-                                    #     tags$video(src = "ReliaShiny.mov", type = "video/mov", controls = TRUE, width = '100%', height = '100%')
-                                    #
-                                    # )
                                   ),
                                   shiny::column(
                                     width = 4,
@@ -314,14 +313,6 @@ ui <- shinydashboard::dashboardPage(
                                         ),
                                         shiny::helpText("Event column must be binary (e.g. 1 for Failure, 0 for Suspension)")
 
-                                        # Failure code
-                                        # shiny::selectizeInput(
-                                        #   inputId = "fail_code",
-                                        #   h5("Failure code:"),
-                                        #   c(""),
-                                        #   selected = 2
-                                        # ),
-                                        # shiny::helpText("Common failure codes include 1, `F`, etc.")
                                       ),
 
                                       # Conditional panel for groups
@@ -474,55 +465,28 @@ ui <- shinydashboard::dashboardPage(
                                                         shiny::selectInput(
                                                           inputId = "probcol",
                                                           h5("Probability Points:"),
-                                                          c("black",
-                                                            "blue",
-                                                            "red",
-                                                            "yellow",
-                                                            "green",
-                                                            "orange",
-                                                            "violet"
-                                                          ),
+                                                          COLORS_FULL,
                                                           selected = "black"
                                                         ),
                                                         # Fit color
                                                         shiny::selectInput(
                                                           inputId = "fitcol",
                                                           h5("Fit:"),
-                                                          c("blue",
-                                                            "red",
-                                                            "yellow",
-                                                            "green",
-                                                            "orange",
-                                                            "violet"
-                                                          ),
+                                                          COLORS_LINE,
                                                           selected = "blue"
                                                         ),
                                                         # CB color
                                                         shiny::selectInput(
                                                           inputId = "confcol",
                                                           h5("Confidence Bounds:"),
-                                                          c("blue",
-                                                            "red",
-                                                            "yellow",
-                                                            "green",
-                                                            "orange",
-                                                            "violet"
-                                                          ),
+                                                          COLORS_LINE,
                                                           selected = "blue"
                                                         ),
                                                         # Grid color
                                                         shiny::selectInput(
                                                           inputId = "gridcol",
                                                           h5("Grid:"),
-                                                          c("lightgray",
-                                                            "black",
-                                                            "blue",
-                                                            "red",
-                                                            "yellow",
-                                                            "green",
-                                                            "orange",
-                                                            "violet"
-                                                          ),
+                                                          COLORS_GRID,
                                                           selected = "lightgray"
                                                         ),
                                                         # Main title
@@ -558,7 +522,9 @@ ui <- shinydashboard::dashboardPage(
                                         plotly::plotlyOutput('probPlot')
                                         ),
                                         shiny::column(width = 3,
-                                                      shiny::tableOutput("wblr_results")
+                                                      shiny::tableOutput("wblr_results"),
+                                                      shiny::downloadButton("downloadWblrResults", "Export CSV",
+                                                                            style = "margin-top:8px;")
                                       )
                                       )
                                     ),
@@ -571,29 +537,14 @@ ui <- shinydashboard::dashboardPage(
                                                                       shiny::selectInput(
                                                                         inputId = "col2",
                                                                         h5("Plot Color:"),
-                                                                        c("black",
-                                                                          "blue",
-                                                                          "red",
-                                                                          "yellow",
-                                                                          "green",
-                                                                          "orange",
-                                                                          "violet"
-                                                                        ),
+                                                                        COLORS_FULL,
                                                                         selected = "blue"
                                                                       ),
                                                                       # Grid color
                                                                       shiny::selectInput(
                                                                         inputId = "gridcol2",
                                                                         h5("Grid Color:"),
-                                                                        c("lightgray",
-                                                                          "black",
-                                                                          "blue",
-                                                                          "red",
-                                                                          "yellow",
-                                                                          "green",
-                                                                          "orange",
-                                                                          "violet"
-                                                                        ),
+                                                                        COLORS_GRID,
                                                                         selected = "lightgray"
                                                                       ),
                                                                       # Show grid
@@ -655,7 +606,7 @@ ui <- shinydashboard::dashboardPage(
                                         # Demo data input select
                                         shiny::selectInput(
                                           inputId = "growthDataSelect",
-                                          h5(" Data:"),
+                                          h5("Data:"),
                                           c("Simple Data Set" = 1,
                                             "Large Data Set" = 2
                                           )
@@ -780,68 +731,35 @@ ui <- shinydashboard::dashboardPage(
                                                         shiny::selectInput(
                                                           inputId = "pointCol",
                                                           h5("Failure Points:"),
-                                                          c("black",
-                                                            "blue",
-                                                            "red",
-                                                            "yellow",
-                                                            "green",
-                                                            "orange",
-                                                            "violet"
-                                                          ),
+                                                          COLORS_FULL,
                                                           selected = "black"
                                                         ),
                                                         # Fit color
                                                         shiny::selectInput(
                                                           inputId = "modelCol",
                                                           h5("Fit:"),
-                                                          c("blue",
-                                                            "red",
-                                                            "yellow",
-                                                            "green",
-                                                            "orange",
-                                                            "violet"
-                                                          ),
+                                                          COLORS_LINE,
                                                           selected = "blue"
                                                         ),
                                                         # CB color
                                                         shiny::selectInput(
                                                           inputId = "growthConfCol",
                                                           h5("Confidence Bounds:"),
-                                                          c("blue",
-                                                            "red",
-                                                            "yellow",
-                                                            "green",
-                                                            "orange",
-                                                            "violet"
-                                                          ),
+                                                          COLORS_LINE,
                                                           selected = "blue"
                                                         ),
                                                         # Grid color
                                                         shiny::selectInput(
                                                           inputId = "growthGridCol",
                                                           h5("Grid:"),
-                                                          c("lightgray",
-                                                            "black",
-                                                            "blue",
-                                                            "red",
-                                                            "yellow",
-                                                            "green",
-                                                            "orange",
-                                                            "violet"
-                                                          ),
+                                                          COLORS_GRID,
                                                           selected = "lightgray"
                                                         ),
                                                         # Breakpoint color
                                                         shiny::selectInput(
                                                           inputId = "breakCol",
                                                           h5("Breakpoints:"),
-                                                          c("blue",
-                                                            "red",
-                                                            "yellow",
-                                                            "green",
-                                                            "orange",
-                                                            "violet"
-                                                          ),
+                                                          COLORS_LINE,
                                                           selected = "black"
                                                         ),
                                                         # Main title
@@ -863,7 +781,9 @@ ui <- shinydashboard::dashboardPage(
                                                       plotly::plotlyOutput('growthPlot')
                                         ),
                                         shiny::column(width = 3,
-                                                      shiny::tableOutput("rga_results")
+                                                      shiny::tableOutput("rga_results"),
+                                                      shiny::downloadButton("downloadRgaResults", "Export CSV",
+                                                                            style = "margin-top:8px;")
                                         )
                                       )
                                     ),
@@ -876,56 +796,28 @@ ui <- shinydashboard::dashboardPage(
                                                                       shiny::selectInput(
                                                                         inputId = "pointCol2",
                                                                         h5("MTBF Points:"),
-                                                                        c("black",
-                                                                          "blue",
-                                                                          "red",
-                                                                          "yellow",
-                                                                          "green",
-                                                                          "orange",
-                                                                          "violet"
-                                                                        ),
+                                                                        COLORS_FULL,
                                                                         selected = "black"
                                                                       ),
                                                                       # Line color
                                                                       shiny::selectInput(
                                                                         inputId = "modelCol2",
                                                                         h5("Fit:"),
-                                                                        c("black",
-                                                                          "blue",
-                                                                          "red",
-                                                                          "yellow",
-                                                                          "green",
-                                                                          "orange",
-                                                                          "violet"
-                                                                        ),
+                                                                        COLORS_FULL,
                                                                         selected = "blue"
                                                                       ),
                                                                       # CB color
                                                                       shiny::selectInput(
                                                                         inputId = "growthConfCol2",
                                                                         h5("Confidence Bounds:"),
-                                                                        c("blue",
-                                                                          "red",
-                                                                          "yellow",
-                                                                          "green",
-                                                                          "orange",
-                                                                          "violet"
-                                                                        ),
+                                                                        COLORS_LINE,
                                                                         selected = "blue"
                                                                       ),
                                                                       # Grid color
                                                                       shiny::selectInput(
                                                                         inputId = "growthGridCol2",
                                                                         h5("Grid:"),
-                                                                        c("lightgray",
-                                                                          "black",
-                                                                          "blue",
-                                                                          "red",
-                                                                          "yellow",
-                                                                          "green",
-                                                                          "orange",
-                                                                          "violet"
-                                                                        ),
+                                                                        COLORS_GRID,
                                                                         selected = "lightgray"
                                                                       ),
                                                                       # Main title
@@ -960,7 +852,7 @@ server <- function(input, output, session) {
     session$onSessionEnded(stopApp)
 
     # Example Time-to-Failure data
-    acid_gas_compressor <- read.csv('data/acid_gas_compressor.csv')
+    acid_gas_compressor <- read.csv(system.file("app", "data", "acid_gas_compressor.csv", package = "ReliaShiny"))
 
     # Time-to-Failure data handler
     output$failure_data <- shiny::downloadHandler(
@@ -971,7 +863,7 @@ server <- function(input, output, session) {
     )
 
     # Example Right Censored data
-    treat6mp <- read.csv('data/treat6mp.csv')
+    treat6mp <- read.csv(system.file("app", "data", "treat6mp.csv", package = "ReliaShiny"))
 
     # Right Censored data handler
     output$censored_data <- shiny::downloadHandler(
@@ -986,9 +878,9 @@ server <- function(input, output, session) {
       if (input$dataInput == 1) {
 
         if (input$dataSelect == 1) {
-          dat <- data.frame(read.csv('data/acid_gas_compressor.csv'))
+          dat <- data.frame(read.csv(system.file("app", "data", "acid_gas_compressor.csv", package = "ReliaShiny")))
         } else if (input$dataSelect == 2) {
-          dat <- data.frame(read.csv('data/treat6mp.csv'))
+          dat <- data.frame(read.csv(system.file("app", "data", "treat6mp.csv", package = "ReliaShiny")))
         }
       } else if (input$dataInput == 2) {
 
@@ -1066,20 +958,8 @@ server <- function(input, output, session) {
     })
 
     # Send the column names to the user
-    shiny::observe({
-        shiny::updateSelectInput(session, "time", choices = coln())
-    })
-    shiny::observe({
-        shiny::updateSelectInput(session, "event", choices = coln())
-    })
-    shiny::observe({
-        shiny::updateSelectInput(session, "qty", choices = coln())
-    })
-    shiny::observe({
-        shiny::updateSelectInput(session, "left", choices = coln())
-    })
-    shiny::observe({
-        shiny::updateSelectInput(session, "right", choices = coln())
+    lapply(c("time", "event", "qty", "left", "right"), function(id) {
+        shiny::observe({ shiny::updateSelectInput(session, id, choices = coln()) })
     })
 
     # Get the event names when the data is right-censored
@@ -1127,7 +1007,7 @@ server <- function(input, output, session) {
             time <- subset(dat(), select = input$right)
             colnames(time) <- 'time'
             wblr_dat0 <- data.frame(time, event = event(), qty = qty())
-                wblr_dat0 <- subset(event == 0)
+                wblr_dat0 <- subset(wblr_dat0, event == 0)
         }
     })
 
@@ -1161,34 +1041,11 @@ server <- function(input, output, session) {
     }, striped = TRUE, hover = TRUE, bordered = TRUE, align = 'c')
 
     # Create a table of the user dataset
-    # output$table <- DT::renderDT({
-    #     if (is.null(dat()))
-    #         return(NULL)
-    #
-    #     shiny::validate(
-    #         shiny::need(!is.null(dat()), message = FALSE)
-    #     )
-    #
-    #     DT::datatable(dat(), rownames = FALSE,
-    #                   options = list(columnDefs = list(
-    #                       list(className = 'dt-center', targets = "_all")
-    #                   ))
-    #                   # , editable = TRUE
-    #     )
-    # })
-
-    # Get data edits from the user
-    # observeEvent(input$table_cell_edit, {
-    #   dat <<- editData(dat(), input$table_cell_edit, 'table', rownames = FALSE)
-    # })
-
     # Create a wblr object
     wblr_obj <- shiny::reactive({
         if (is.null(wblr_dat()))
             return(NULL)
 
-        # Error handling
-        # Need error handling for intervals
         shiny::validate(
             shiny::need(
                 try(is.numeric(wblr_dat()$time)),
@@ -1268,6 +1125,11 @@ server <- function(input, output, session) {
         wblr_res()
         }, striped = TRUE, hover = TRUE, bordered = TRUE, align = 'c')
 
+    output$downloadWblrResults <- shiny::downloadHandler(
+        filename = function() paste0("wblr_results_", Sys.Date(), ".csv"),
+        content  = function(file) write.csv(wblr_res(), file, row.names = FALSE)
+    )
+
     # Create a suspensions vector
     susp_vec <- shiny::reactive({
         if (is.null(input$event) || input$suspensions == 0) {
@@ -1283,7 +1145,7 @@ server <- function(input, output, session) {
         if (is.null(wblr_obj()))
             return(NULL)
 
-        ReliaPlotR::plotly_wblr(
+        p <- ReliaPlotR::plotly_wblr(
             wblr_obj(),
             susp = susp_vec(),
             showSusp = input$suspPlot,
@@ -1291,12 +1153,13 @@ server <- function(input, output, session) {
             xlab = input$xlab,
             ylab = input$ylab,
             probCol = input$probcol,
-            fitCol = input$modelCol,
+            fitCol = input$fitcol,
             confCol = input$confcol,
             gridCol = input$gridcol,
             showGrid = input$grid,
             signif = input$signif
         )
+        plotly::config(p, toImageButtonOptions = list(format = "png", filename = "probability_plot"))
 
     })
 
@@ -1307,14 +1170,14 @@ server <- function(input, output, session) {
         shiny::validate(
             shiny::need(
                 try(input$meth == "mle"),
-                "Contour plots are only available for the ''MLE' estimation method..."
+                "Contour plots require the 'MLE' estimation method. Please switch to MLE above."
             ) %then%
                 shiny::need(
                     try(input$mleConf == 'lrb'),
-                    "Contour plots are only available for the 'LRB' confidence method..."
+                    "Contour plots require the 'LRB' (Likelihood Ratio Bounds) confidence method. Please select LRB above."
                 )
         )
-        ReliaPlotR::plotly_contour(
+        p <- ReliaPlotR::plotly_contour(
             wblr_obj(),
             main = input$main2,
             xlab = input$xlab2,
@@ -1324,10 +1187,11 @@ server <- function(input, output, session) {
             showGrid = input$grid2,
             signif = input$signif2
         )
+        plotly::config(p, toImageButtonOptions = list(format = "png", filename = "contour_plot"))
     })
 
     # Example reliability growth data
-    simpleData <- read.csv('data/simpleData.csv')
+    simpleData <- read.csv(system.file("app", "data", "simpleData.csv", package = "ReliaShiny"))
 
     # Reliability growth data handler
     output$growthData <- shiny::downloadHandler(
@@ -1338,7 +1202,7 @@ server <- function(input, output, session) {
     )
 
     # Example large data set
-    largeData <- read.csv('data/largeData.csv')
+    largeData <- read.csv(system.file("app", "data", "largeData.csv", package = "ReliaShiny"))
 
     # Large data handler
     output$largeData <- shiny::downloadHandler(
@@ -1353,9 +1217,9 @@ server <- function(input, output, session) {
       if (input$growthDataInput == 1) {
 
         if (input$growthDataSelect == 1) {
-          growthDat <- data.frame(read.csv('data/simpleData.csv'))
+          growthDat <- data.frame(read.csv(system.file("app", "data", "simpleData.csv", package = "ReliaShiny")))
         } else if (input$growthDataSelect == 2) {
-          growthDat <- data.frame(read.csv('data/largeData.csv'))
+          growthDat <- data.frame(read.csv(system.file("app", "data", "largeData.csv", package = "ReliaShiny")))
         }
       } else if (input$growthDataInput == 2) {
 
@@ -1409,11 +1273,8 @@ server <- function(input, output, session) {
     })
 
     # Send the column names to the user
-    shiny::observe({
-      shiny::updateSelectInput(session, "times", choices = growthColn())
-    })
-    shiny::observe({
-      shiny::updateSelectInput(session, "failures", choices = growthColn())
+    lapply(c("times", "failures"), function(id) {
+      shiny::observe({ shiny::updateSelectInput(session, id, choices = growthColn()) })
     })
 
     # Create a table of the user dataset
@@ -1487,7 +1348,7 @@ server <- function(input, output, session) {
         )
 
         # Transform user-supplied breakpoints into a numeric vector
-        breakpoints <- as.numeric(unlist(input$breakpoints,","))
+        breakpoints <- as.numeric(input$breakpoints)
         rga_obj <-
           ReliaGrowR::rga(
             times = growthDat()[[input$times]],
@@ -1528,12 +1389,17 @@ server <- function(input, output, session) {
       rga_res()
     }, striped = TRUE, hover = TRUE, bordered = TRUE, align = 'c')
 
+    output$downloadRgaResults <- shiny::downloadHandler(
+      filename = function() paste0("rga_results_", Sys.Date(), ".csv"),
+      content  = function(file) write.csv(rga_res(), file, row.names = FALSE)
+    )
+
     # Build the reliability growth plot
     output$growthPlot <- plotly::renderPlotly({
       if (is.null(rga_obj()))
         return(NULL)
 
-      ReliaPlotR::plotly_rga(
+      p <- ReliaPlotR::plotly_rga(
         rga_obj(),
         main = input$growthMain,
         xlab = input$growthXlab,
@@ -1544,6 +1410,7 @@ server <- function(input, output, session) {
         gridCol = input$growthGridCol,
         breakCol = input$breakCol
       )
+      plotly::config(p, toImageButtonOptions = list(format = "png", filename = "growth_plot"))
     })
 
     # Create a duane object
@@ -1596,7 +1463,7 @@ server <- function(input, output, session) {
       if (is.null(duane_obj()))
         return(NULL)
 
-      ReliaPlotR::plotly_duane(
+      p <- ReliaPlotR::plotly_duane(
         duane_obj(),
         pointCol = input$pointCol2,
         fitCol = input$modelCol2,
@@ -1606,6 +1473,7 @@ server <- function(input, output, session) {
         xlab = input$duaneXlab,
         ylab = input$duaneYlab
       )
+      plotly::config(p, toImageButtonOptions = list(format = "png", filename = "duane_plot"))
     })
 }
 

@@ -2,6 +2,10 @@
 
 export("%>%")
 export(ReliaShiny)
+export(extract_alt_summ)
+export(extract_nhpp_summ)
+export(extract_rga_summ)
+export(extract_wblr_summ)
 import(ReliaGrowR)
 import(ReliaPlotR)
 import(WeibullR)

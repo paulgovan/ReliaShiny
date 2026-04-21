@@ -10,6 +10,7 @@ Imports:
     ReliaGrowR,
     ReliaPlotR,
     WeibullR,
+    WeibullR.ALT,
     shiny,
     shinydashboard,
     shinyWidgets

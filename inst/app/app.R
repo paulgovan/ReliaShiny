@@ -1292,7 +1292,7 @@ server <- function(input, output, session) {
     })
 
     # Example Time-to-Failure data
-    acid_gas_compressor <- read.csv(system.file("app", "data", "acid_gas_compressor.csv", package = "ReliaShiny"))
+    acid_gas_compressor <- read.csv(file.path("data", "acid_gas_compressor.csv"))
 
     # Time-to-Failure data handler
     output$failure_data <- shiny::downloadHandler(
@@ -1303,7 +1303,7 @@ server <- function(input, output, session) {
     )
 
     # Example Right Censored data
-    treat6mp <- read.csv(system.file("app", "data", "treat6mp.csv", package = "ReliaShiny"))
+    treat6mp <- read.csv(file.path("data", "treat6mp.csv"))
 
     # Right Censored data handler
     output$censored_data <- shiny::downloadHandler(
@@ -1318,9 +1318,9 @@ server <- function(input, output, session) {
       if (input$dataInput == 1) {
 
         if (input$dataSelect == 1) {
-          dat <- data.frame(read.csv(system.file("app", "data", "acid_gas_compressor.csv", package = "ReliaShiny")))
+          dat <- data.frame(read.csv(file.path("data", "acid_gas_compressor.csv")))
         } else if (input$dataSelect == 2) {
-          dat <- data.frame(read.csv(system.file("app", "data", "treat6mp.csv", package = "ReliaShiny")))
+          dat <- data.frame(read.csv(file.path("data", "treat6mp.csv")))
         }
       } else if (input$dataInput == 2) {
 
@@ -1601,7 +1601,7 @@ server <- function(input, output, session) {
     })
 
     # Example reliability growth data
-    simpleData <- read.csv(system.file("app", "data", "simpleData.csv", package = "ReliaShiny"))
+    simpleData <- read.csv(file.path("data", "simpleData.csv"))
 
     # Reliability growth data handler
     output$growthData <- shiny::downloadHandler(
@@ -1612,7 +1612,7 @@ server <- function(input, output, session) {
     )
 
     # Example large data set
-    largeData <- read.csv(system.file("app", "data", "largeData.csv", package = "ReliaShiny"))
+    largeData <- read.csv(file.path("data", "largeData.csv"))
 
     # Large data handler
     output$largeData <- shiny::downloadHandler(
@@ -1627,9 +1627,9 @@ server <- function(input, output, session) {
       if (input$growthDataInput == 1) {
 
         if (input$growthDataSelect == 1) {
-          growthDat <- data.frame(read.csv(system.file("app", "data", "simpleData.csv", package = "ReliaShiny")))
+          growthDat <- data.frame(read.csv(file.path("data", "simpleData.csv")))
         } else if (input$growthDataSelect == 2) {
-          growthDat <- data.frame(read.csv(system.file("app", "data", "largeData.csv", package = "ReliaShiny")))
+          growthDat <- data.frame(read.csv(file.path("data", "largeData.csv")))
         }
       } else if (input$growthDataInput == 2) {
 
@@ -1915,7 +1915,7 @@ server <- function(input, output, session) {
     rsDat <- shiny::reactive({
       if (input$rsDataInput == 1) {
         path <- if (input$rsDataSelect == 1) "simpleRepairData.csv" else "largeRepairData.csv"
-        data.frame(read.csv(system.file("app", "data", path, package = "ReliaShiny")))
+        data.frame(read.csv(file.path("data", path)))
       } else {
         rsFile <- input$rsFile
         if (is.null(rsFile)) return(NULL)
@@ -2145,7 +2145,7 @@ server <- function(input, output, session) {
     altDat <- shiny::reactive({
       if (input$altDataInput == 1) {
         path <- if (input$altDataSelect == 1) "nelsonData.csv" else "meekerData.csv"
-        data.frame(read.csv(system.file("app", "data", path, package = "ReliaShiny")))
+        data.frame(read.csv(file.path("data", path)))
       } else {
         f <- input$altFile
         if (is.null(f)) return(NULL)

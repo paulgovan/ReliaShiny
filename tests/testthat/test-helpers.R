@@ -54,7 +54,8 @@ test_that("extract_rga_summ returns correct structure for Crow-AMSAA", {
   expect_true("LogLik" %in% result$Param)
   expect_true("AIC" %in% result$Param)
   expect_true("BIC" %in% result$Param)
-  expect_equal(result$Value[[result$Param == "Model Type"]], "Crow-AMSAA")
+  # Value column is a list (AsIs); index with single bracket + [[1]]
+  expect_equal(result$Value[result$Param == "Model Type"][[1]], "Crow-AMSAA")
 })
 
 test_that("extract_rga_summ Growth Rate is between 0 and 1 for improving system", {
@@ -63,15 +64,19 @@ test_that("extract_rga_summ Growth Rate is between 0 and 1 for improving system"
 
   result <- extract_rga_summ(obj)
 
-  gr <- as.numeric(result$Value[[result$Param == "Growth Rate"]])
+  gr <- as.numeric(result$Value[result$Param == "Growth Rate"][[1]])
   expect_true(gr > 0 && gr < 1)
 })
 
 test_that("extract_nhpp_summ returns correct structure for Power Law", {
   rs  <- read.csv(system.file("app", "data", "simpleRepairData.csv", package = "ReliaShiny"))
-  end_times <- tapply(rs$end_time, as.character(rs$id), max)
-  obj <- ReliaGrowR::nhpp(rs$time, id = as.character(rs$id),
-                          end_time = end_times, model_type = "Power Law")
+  rs  <- rs[order(rs$time), ]
+  obj <- ReliaGrowR::nhpp(
+    time       = "time",
+    event      = "event",
+    data       = rs,
+    model_type = "Power Law"
+  )
 
   result <- extract_nhpp_summ(obj)
 

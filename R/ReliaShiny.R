@@ -8,6 +8,7 @@
 #' @import shinydashboard
 #' @import shinyWidgets
 #' @import WeibullR
+#' @importFrom WeibullR.ALT alt.data alt.make alt.parallel alt.fit
 #' @export
 #' @seealso \url{https://paulgovan.github.io/ReliaShiny/}
 #' @return This function does not return a value.

@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(R --vanilla --slave)",
-      "Bash(R --vanilla --quiet)"
-    ]
-  }
-}

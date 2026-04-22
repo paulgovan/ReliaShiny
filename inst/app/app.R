@@ -69,22 +69,30 @@ extract_alt_summ <- function(alt_obj, digits = 4) {
   # Reconstruct the life-stress linear model for GoF metrics
   pp   <- alt_obj$parallel_par
   x_tr <- if (alt_obj$alt.model == "arrhenius") 1 / pp$stress else log(pp$stress)
-  lm_s <- summary(stats::lm(log(pp$P1) ~ x_tr, weights = pp$wt))
+  lm_f <- stats::lm(log(pp$P1) ~ x_tr, weights = pp$wt)
+  lm_s <- summary(lm_f)
   r2     <- round(lm_s$r.squared,     digits)
   adj_r2 <- round(lm_s$adj.r.squared, digits)
+  loglik <- round(as.numeric(stats::logLik(lm_f)), digits)
+  aic    <- round(stats::AIC(lm_f), digits)
+  bic    <- round(stats::BIC(lm_f), digits)
 
   data.frame(
     Param = c("Distribution", "ALT Model", "Intercept", "Slope", "Beta (Shape)",
               paste0("Eta @ Stress ", stress),
               paste0("AF @ Stress ", stress),
-              "R\u00b2 (Life-Stress)", "Adj. R\u00b2 (Life-Stress)"),
+              "R\u00b2 (Life-Stress)", "Adj. R\u00b2 (Life-Stress)",
+              "LogLik (Life-Stress)", "AIC (Life-Stress)", "BIC (Life-Stress)"),
     Value = c(alt_obj$dist, alt_obj$alt.model,
               as.character(coefs),
               as.character(beta),
               as.character(etas),
               as.character(af),
               as.character(r2),
-              as.character(adj_r2)),
+              as.character(adj_r2),
+              as.character(loglik),
+              as.character(aic),
+              as.character(bic)),
     stringsAsFactors = FALSE
   )
 }
@@ -201,7 +209,14 @@ ui <- shinydashboard::dashboardPage(
     ),
 
     ## Body content
-    shinydashboard::dashboardBody(shinydashboard::tabItems(
+    shinydashboard::dashboardBody(
+      tags$head(tags$style(HTML(
+        "@media (max-width: 767px) {
+          .info-box { width: 100% !important; }
+          .col-sm-3 { width: 100% !important; }
+        }"
+      ))),
+      shinydashboard::tabItems(
         # First tab content
         shinydashboard::tabItem(tabName = "landing",
                                 shiny::fluidRow(
@@ -290,10 +305,10 @@ ui <- shinydashboard::dashboardPage(
                                   )
                                 ),
                                 shiny::fluidRow(
-                                  shiny::column(width = 3, align = "center", shiny::actionButton("goToLifeData", "Take Me There", class = "btn-default btn-sm")),
-                                  shiny::column(width = 3, align = "center", shiny::actionButton("goToGrowth",   "Take Me There", class = "btn-default btn-sm")),
-                                  shiny::column(width = 3, align = "center", shiny::actionButton("goToRepair",   "Take Me There", class = "btn-default btn-sm")),
-                                  shiny::column(width = 3, align = "center", shiny::actionButton("goToAlt",      "Take Me There", class = "btn-default btn-sm"))
+                                  shiny::column(width = 3, align = "center", shiny::actionButton("goToLifeData", "Life Data",              class = "btn-default")),
+                                  shiny::column(width = 3, align = "center", shiny::actionButton("goToGrowth",   "Reliability Growth",      class = "btn-default")),
+                                  shiny::column(width = 3, align = "center", shiny::actionButton("goToRepair",   "Repairable Systems",      class = "btn-default")),
+                                  shiny::column(width = 3, align = "center", shiny::actionButton("goToAlt",      "Accelerated Life Testing", class = "btn-default"))
                                 )
         ),
 
@@ -2272,6 +2287,17 @@ server <- function(input, output, session) {
         percCol = input$altRelPercCol,
         gridCol = input$altRelGridCol
       )
+      summ <- extract_alt_summ(alt_obj())
+      r2     <- summ$Value[summ$Param == "R\u00b2 (Life-Stress)"]
+      adj_r2 <- summ$Value[summ$Param == "Adj. R\u00b2 (Life-Stress)"]
+      p <- plotly::layout(p, annotations = list(list(
+        x = 1, y = 1, xref = "paper", yref = "paper",
+        xanchor = "right", yanchor = "top",
+        text = paste0("R\u00b2 = ", r2, "<br>Adj. R\u00b2 = ", adj_r2),
+        showarrow = FALSE,
+        font = list(size = 12),
+        bgcolor = "white", bordercolor = "lightgray", borderwidth = 1
+      )))
       plotly::config(p, toImageButtonOptions = list(format = "png", filename = "alt_rel_plot"))
     })
 

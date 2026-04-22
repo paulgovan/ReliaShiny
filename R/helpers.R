@@ -67,22 +67,30 @@ extract_alt_summ <- function(alt_obj, digits = 4) {
 
   pp   <- alt_obj$parallel_par
   x_tr <- if (alt_obj$alt.model == "arrhenius") 1 / pp$stress else log(pp$stress)
-  lm_s <- summary(stats::lm(log(pp$P1) ~ x_tr, weights = pp$wt))
+  lm_f <- stats::lm(log(pp$P1) ~ x_tr, weights = pp$wt)
+  lm_s <- summary(lm_f)
   r2     <- round(lm_s$r.squared,     digits)
   adj_r2 <- round(lm_s$adj.r.squared, digits)
+  loglik <- round(as.numeric(stats::logLik(lm_f)), digits)
+  aic    <- round(stats::AIC(lm_f), digits)
+  bic    <- round(stats::BIC(lm_f), digits)
 
   data.frame(
     Param = c("Distribution", "ALT Model", "Intercept", "Slope", "Beta (Shape)",
               paste0("Eta @ Stress ", stress),
               paste0("AF @ Stress ", stress),
-              "R\u00b2 (Life-Stress)", "Adj. R\u00b2 (Life-Stress)"),
+              "R\u00b2 (Life-Stress)", "Adj. R\u00b2 (Life-Stress)",
+              "LogLik (Life-Stress)", "AIC (Life-Stress)", "BIC (Life-Stress)"),
     Value = c(alt_obj$dist, alt_obj$alt.model,
               as.character(coefs),
               as.character(beta),
               as.character(etas),
               as.character(af),
               as.character(r2),
-              as.character(adj_r2)),
+              as.character(adj_r2),
+              as.character(loglik),
+              as.character(aic),
+              as.character(bic)),
     stringsAsFactors = FALSE
   )
 }

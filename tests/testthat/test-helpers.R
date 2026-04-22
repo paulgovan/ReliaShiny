@@ -105,13 +105,16 @@ test_that("extract_alt_summ returns correct row count for Nelson data (3 stress 
 
   result <- extract_alt_summ(obj)
 
-  # 5 fixed + 3 Eta + 3 AF + 2 GoF = 13
-  expect_equal(nrow(result), 13)
+  # 5 fixed + 3 Eta + 3 AF + 5 GoF = 16
+  expect_equal(nrow(result), 16)
   expect_equal(ncol(result), 2)
   expect_true("Beta (Shape)" %in% result$Param)
   expect_true("Eta @ Stress 300" %in% result$Param)
   expect_true("AF @ Stress 300" %in% result$Param)
   expect_true("R\u00b2 (Life-Stress)" %in% result$Param)
+  expect_true("LogLik (Life-Stress)" %in% result$Param)
+  expect_true("AIC (Life-Stress)" %in% result$Param)
+  expect_true("BIC (Life-Stress)" %in% result$Param)
 
   # AF at lowest stress must be 1
   af_low <- as.numeric(result$Value[result$Param == "AF @ Stress 300"])
@@ -140,6 +143,6 @@ test_that("extract_alt_summ works with Meeker data (Power Law)", {
 
   result <- extract_alt_summ(obj)
 
-  expect_equal(nrow(result), 13)
+  expect_equal(nrow(result), 16)
   expect_equal(result$Value[result$Param == "ALT Model"], "power")
 })

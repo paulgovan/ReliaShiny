@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/paulgovan/ReliaShiny/blob/master/inst/CITATION)
+[`inst/CITATION`](https://github.com/paulgovan/ReliaShiny/blob/v0.5/inst/CITATION)
 
 Govan P (2026). “ReliaShiny: A Shiny Application for Reliability
 Analysis.” *IEEE Reliability Magazine*, 1-9.

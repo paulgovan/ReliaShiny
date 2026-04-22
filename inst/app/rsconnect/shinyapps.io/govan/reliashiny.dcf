@@ -5,9 +5,9 @@ account: govan
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 15715432
-bundleId: 11886544
+bundleId: 11887015
 url: https://govan.shinyapps.io/reliashiny/
 version: 1
 asMultiple: FALSE
 asStatic: FALSE
-ignoredFiles: tests
+ignoredFiles: tests/testthat/setup-shinytest2.R|tests/testthat/test-shinytest2.R|tests/testthat.R

@@ -9,6 +9,7 @@ Imports:
     magrittr,
     ReliaGrowR,
     ReliaPlotR,
+    shinycssloaders,
     WeibullR,
     WeibullR.ALT,
     shiny,

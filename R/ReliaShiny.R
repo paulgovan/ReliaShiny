@@ -8,6 +8,7 @@
 #' @import shinydashboard
 #' @import shinyWidgets
 #' @import WeibullR
+#' @importFrom shinycssloaders withSpinner
 #' @importFrom WeibullR.ALT alt.data alt.make alt.parallel alt.fit
 #' @export
 #' @seealso \url{https://paulgovan.github.io/ReliaShiny/}

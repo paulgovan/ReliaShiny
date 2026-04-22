@@ -1,3 +1,24 @@
+# ReliaShiny v0.5
+
+## New features
+* Added **Repairable Systems** module for recurrent event analysis using Non-Homogeneous Poisson Process (NHPP) models (Power Law, Log-Linear).
+* Added **Accelerated Life Testing (ALT)** module supporting Weibull and Lognormal distributions with Arrhenius and Power Law life-stress relationships.
+* ALT results table now includes goodness-of-fit metrics for the life-stress relationship: R², Adj. R², LogLik, AIC, and BIC.
+* ALT life-stress relationship plot now displays R² and Adj. R² as an annotation.
+* ALT probability plots include an option to show/hide confidence bounds.
+* Landing page action buttons now labeled with module names and sized for better usability.
+* Landing page layout is responsive: infoboxes and buttons stack vertically on mobile screens.
+
+## Testing
+* Added comprehensive unit tests for all summary extraction helper functions (`extract_wblr_summ`, `extract_rga_summ`, `extract_nhpp_summ`, `extract_alt_summ`).
+* Added end-to-end `shinytest2` tests covering all four analysis modules.
+
+## Bug fixes and improvements
+* Fixed `system.file()` paths that returned empty strings on shinyapps.io; replaced with `file.path()` relative paths.
+* Extracted summary helper functions to `R/helpers.R` for standalone testability.
+* Fixed R CMD check namespace warnings for `WeibullR.ALT` and `shinycssloaders`.
+* Added `shinycssloaders` loading spinners to all plot outputs.
+
 # ReliaShiny v0.4 (formerly WeibullR.shiny)
 
 * `WeibullR.shiny` was renamed to `ReliaShiny` to better reflect its purpose as a reliability analysis tool.

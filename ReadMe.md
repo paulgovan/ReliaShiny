@@ -19,7 +19,8 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 for reliability analysis. The app is built using the
 [shiny](https://shiny.posit.co/) package in R. ReliaShiny provides an
 easy-to-use interface for performing reliability analysis using the
-[WeibullR](https://cran.r-project.org/package=WeibullR) and
+[WeibullR](https://cran.r-project.org/package=WeibullR),
+[WeibullR.ALT](https://cran.r-project.org/package=WeibullR.ALT), and
 [ReliaGrowR](https://cran.r-project.org/package=ReliaGrowR) packages in
 R.
 
@@ -49,6 +50,48 @@ style="width:100.0%" />
 
 Or to access the app through a browser, visit
 [govan.shinyapps.io/reliashiny/](https://govan.shinyapps.io/reliashiny/).
+
+## Features
+
+### Life Data Analysis
+
+Fit Weibull and Lognormal distributions to time-to-failure data using
+Maximum Likelihood Estimation or Rank Regression. Generate probability
+plots and contour plots to assess fit and parameter uncertainty.
+
+<img
+src="https://github.com/paulgovan/ReliaShiny/blob/master/inst/images/ProbPlot.png?raw=true"
+style="width:100.0%" />
+
+### Reliability Growth Analysis
+
+Model reliability growth using Crow-AMSAA, Piecewise NHPP, or automatic
+change-point detection. Visualize results with Reliability Growth and
+Duane plots.
+
+<img
+src="https://github.com/paulgovan/ReliaShiny/blob/master/inst/images/GrowthPlot.png?raw=true"
+style="width:100.0%" />
+
+### Repairable Systems
+
+Analyze repairable systems with Power Law, Log-Linear, or Piecewise NHPP
+models. Visualize cumulative events, event rates, and the Mean
+Cumulative Function (MCF).
+
+<img
+src="https://github.com/paulgovan/ReliaShiny/blob/master/inst/images/Repairable%20Systems/RepairablePlot.png?raw=true"
+style="width:100.0%" />
+
+### Accelerated Life Testing
+
+Fit Weibull or Lognormal distributions under accelerated stress
+conditions using Arrhenius or Power Law life-stress relationships.
+Visualize ALT probability plots and life-stress relationships.
+
+<img
+src="https://github.com/paulgovan/ReliaShiny/blob/master/inst/images/ALT/ALTPlot.png?raw=true"
+style="width:100.0%" />
 
 ## Code of Conduct
 

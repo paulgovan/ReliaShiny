@@ -93,6 +93,18 @@ Visualize ALT probability plots and life-stress relationships.
 src="https://github.com/paulgovan/ReliaShiny/blob/master/inst/images/ALT/ALTPlot.png?raw=true"
 style="width:100.0%" />
 
+## Citation
+
+If you use ReliaShiny in your research, please cite the following:
+
+> Govan, P. (2026). ReliaShiny: A Shiny Application for Reliability
+> Analysis. *IEEE Reliability Magazine*, 1–9.
+> <https://doi.org/10.1109/MRL.2026.3669057>
+
+> Govan, P. (2023). *ReliaShiny: A Shiny App Reliability Analysis*. R
+> package version 0.2.0.
+> <https://doi.org/10.32614/CRAN.package.ReliaShiny>
+
 ## Code of Conduct
 
 Please note that the ReliaShiny project is released with a [Contributor

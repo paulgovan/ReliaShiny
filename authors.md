@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/paulgovan/ReliaShiny/blob/v0.5/inst/CITATION)
+[`inst/CITATION`](https://github.com/paulgovan/ReliaShiny/blob/master/inst/CITATION)
 
 Govan P (2026). “ReliaShiny: A Shiny Application for Reliability
 Analysis.” *IEEE Reliability Magazine*, 1-9.
@@ -24,7 +24,7 @@ Analysis.” *IEEE Reliability Magazine*, 1-9.
     }
 
 Govan P (2023). *ReliaShiny: A Shiny App Reliability Analysis*.
-[doi:10.32614/CRAN.package.ReliaShiny](https://doi.org/10.32614/CRAN.package.ReliaShiny),
+[doi:10.32614/CRAN.package.ReliaShiny](https://doi.org/10.32614/CRAN.package.ReliaShiny).
 R package version 0.2.0,
 <https://CRAN.R-project.org/package=ReliaShiny>.
 

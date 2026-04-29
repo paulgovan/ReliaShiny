@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Life Data Analysis • ReliaShiny</title>
+<title>Repairable Systems Analysis • ReliaShiny</title>
 <script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Life Data Analysis">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Repairable Systems Analysis">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -71,11 +71,11 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>Life Data Analysis</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>Repairable Systems Analysis</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/paulgovan/ReliaShiny/blob/master/vignettes/LDA.Rmd" class="external-link"><code>vignettes/LDA.Rmd</code></a></small>
-      <div class="d-none name"><code>LDA.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/paulgovan/ReliaShiny/blob/master/vignettes/RS.Rmd" class="external-link"><code>vignettes/RS.Rmd</code></a></small>
+      <div class="d-none name"><code>RS.Rmd</code></div>
     </div>
 
     
@@ -88,34 +88,40 @@ here, you can:</p>
 <ul>
 <li>Access the Project Site.</li>
 <li>Download an example dataset.</li>
-<li>Navigate to the Time-to-Failure menu.</li>
+<li>Navigate to the Repairable Systems menu.</li>
 </ul>
 <p><img src="https://github.com/paulgovan/ReliaShiny/blob/master/inst/images/Landing.png?raw=true" style="width:100.0%"></p>
 </div>
 <div class="section level2">
 <h2 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a>
 </h2>
-<p>For demonstration, we’ll use the preloaded “Time-to-Failure” dataset.
-First, navigate to the Time-to-Failure menu and click on the Data
-sub-menu.</p>
+<p>For demonstration, we’ll use the preloaded “Simple Data Set” dataset.
+First, navigate to the Repairable Systems menu and click on the Data
+sub-menu. Next, under the Data Selection box, select the appropriate
+columns for System ID, Event Time, and Event Indicator.</p>
 <p>At this stage, your app should resemble the following:</p>
-<p><img src="https://github.com/paulgovan/ReliaShiny/blob/master/inst/images/Data.png?raw=true" style="width:100.0%"></p>
+<p><img src="https://github.com/paulgovan/ReliaShiny/blob/master/inst/images/Repairable%20Systems/RepairableData.png?raw=true" style="width:100.0%"></p>
 <p>You can explore additional options for data arrangement, but for this
 example, we’ll proceed with the default settings.</p>
 </div>
 <div class="section level2">
 <h2 id="modeling">Modeling<a class="anchor" aria-label="anchor" href="#modeling"></a>
 </h2>
-<p>Next, navigate to the Model sub-menu to build your Weibull model. The
-app will generate a Probability Plot using default settings. Feel free
-to experiment with different configurations to tailor the model to your
-needs.</p>
+<p>Next, navigate to the Model sub-menu to build your Repairable Systems
+model. The app will generate an NHPP Plot using the Power Law NHPP model
+by default. Feel free to experiment with different model configurations
+to tailor the analysis to your needs.</p>
 <p>Next to the plot, you’ll find additional settings for further
 customization.</p>
-<p><img src="https://github.com/paulgovan/ReliaShiny/blob/master/inst/images/ProbPlot.png?raw=true" style="width:100.0%"></p>
-<p>Finally, visit the Contour Plot tab to create a contour plot. As with
-the previous plot, various customization options are available.</p>
-<p><img src="https://github.com/paulgovan/ReliaShiny/blob/master/inst/images/ContPlot.png?raw=true" style="width:100.0%"></p>
+<p><img src="https://github.com/paulgovan/ReliaShiny/blob/master/inst/images/Repairable%20Systems/RepairablePlot.png?raw=true" style="width:100.0%"></p>
+<p>Next, visit the Exposure Plot tab to visualize the event rate over
+time. As with the previous plot, various customization options are
+available.</p>
+<p><img src="https://github.com/paulgovan/ReliaShiny/blob/master/inst/images/Repairable%20Systems/ExposurePlot.png?raw=true" style="width:100.0%"></p>
+<p>Finally, visit the MCF Plot tab to create a Mean Cumulative Function
+plot. As with the previous plots, various customization options are
+available.</p>
+<p><img src="https://github.com/paulgovan/ReliaShiny/blob/master/inst/images/Repairable%20Systems/MCFPlot.png?raw=true" style="width:100.0%"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
